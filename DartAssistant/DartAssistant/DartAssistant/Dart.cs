@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DartAssistant
 {
@@ -8,6 +9,52 @@ namespace DartAssistant
     public class Dart
     {
         #region Members and Properties
+
+        /// <summary>
+        /// Gets an Abbreviation that describes the SegmentMulitplier and BaseValue of the dart board segment that is to be hit or was hit.
+        /// </summary>
+        public string Abbreviation
+        {
+            get
+            {
+                if(0 < BaseValue)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    switch (Multiplier)
+                    {
+                        case SegmentMultiplier.Single:
+                            {
+                                sb.Append("S");
+                                break;
+                            }
+                        case SegmentMultiplier.Double:
+                            {
+                                sb.Append("D");
+                                break;
+                            }
+                        case SegmentMultiplier.Triple:
+                            {
+                                sb.Append("T");
+                                break;
+                            }
+                    }
+
+                    if (1 <= BaseValue && 20 >= BaseValue)
+                    {
+                        sb.Append(BaseValue);
+                    }
+                    else if (25 == BaseValue)
+                    {
+                        sb.Append("B");
+                    }
+
+                    return sb.ToString();
+                }
+
+                return "Miss";
+            }
+        }
 
         /// <summary>
         /// Gets the Base Value of the dart board segment that is to be hit or was hit.
@@ -89,6 +136,50 @@ namespace DartAssistant
             {
                 throw new ArgumentOutOfRangeException("baseValue", "baseValue must be 0 - 20 or 25");
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        public override string ToString()
+        {
+            if (0 < BaseValue)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                switch (Multiplier)
+                {
+                    case SegmentMultiplier.Single:
+                        {
+                            sb.Append("Single ");
+                            break;
+                        }
+                    case SegmentMultiplier.Double:
+                        {
+                            sb.Append("Double ");
+                            break;
+                        }
+                    case SegmentMultiplier.Triple:
+                        {
+                            sb.Append("Triple ");
+                            break;
+                        }
+                }
+
+                if (1 <= BaseValue && 20 >= BaseValue)
+                {
+                    sb.Append(BaseValue);
+                }
+                else if (25 == BaseValue)
+                {
+                    sb.Append("Bull");
+                }
+
+                return sb.ToString();
+            }
+
+            return "Miss";
         }
 
         #endregion

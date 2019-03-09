@@ -280,5 +280,302 @@ namespace DartAssistant.Test
         }
 
         #endregion
+
+        #region Abbreviation
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 0
+        /// THEN the Abbreviation property will return "Miss"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf0_ReturnsMiss()
+        {
+            // Arrange
+            int baseValue = 0;
+
+            // Act
+            Dart subject = new Dart(baseValue, SegmentMultiplier.Miss);
+
+            // Assert
+            Assert.AreEqual("Miss", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 1 and a SegmentMultiplier.Single
+        /// THEN the Abbreviation property will return "S1"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf1WithSignle_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(1, SegmentMultiplier.Single);
+
+            // Assert
+            Assert.AreEqual("S1", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 1 and a SegmentMultiplier.Double
+        /// THEN the Abbreviation property will return "D1"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf1WithDouble_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(1, SegmentMultiplier.Double);
+
+            // Assert
+            Assert.AreEqual("D1", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 1 and a SegmentMultiplier.Triple
+        /// THEN the Abbreviation property will return "T1"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf1WithTriple_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(1, SegmentMultiplier.Triple);
+
+            // Assert
+            Assert.AreEqual("T1", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 20 and a SegmentMultiplier.Triple
+        /// THEN the Abbreviation property will return "T20"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf20WithTriple_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(20, SegmentMultiplier.Triple);
+
+            // Assert
+            Assert.AreEqual("T20", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 20 and a SegmentMultiplier.Single
+        /// THEN the Abbreviation property will return "S20"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf20WithSignle_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(20, SegmentMultiplier.Single);
+
+            // Assert
+            Assert.AreEqual("S20", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 20 and a SegmentMultiplier.Double
+        /// THEN the Abbreviation property will return "D20"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf20WithDouble_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(20, SegmentMultiplier.Double);
+
+            // Assert
+            Assert.AreEqual("D20", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 25 and a SegmentMultiplier.Single
+        /// THEN the Abbreviation property will return "SB"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf25WithSignle_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(25, SegmentMultiplier.Single);
+
+            // Assert
+            Assert.AreEqual("SB", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 25 and a SegmentMultiplier.Double
+        /// THEN the Abbreviation property will return "DB"
+        /// </summary>
+        [TestMethod]
+        public void AbbreviationProperty_BaseValueOf25WithDouble_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(25, SegmentMultiplier.Double);
+
+            // Assert
+            Assert.AreEqual("DB", subject.Abbreviation, "Abbreviation was not the expected value");
+        }
+
+        #endregion
+
+        #region ToString()
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 0
+        /// THEN the ToString method will return "Miss"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf0_ReturnsMiss()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(0, SegmentMultiplier.Miss);
+
+            // Assert
+            Assert.AreEqual("Miss", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 1 and a SegmentMultiplier.Single
+        /// THEN the ToString method will return "Single 1"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf1WithSignle_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(1, SegmentMultiplier.Single);
+
+            // Assert
+            Assert.AreEqual("Single 1", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 1 and a SegmentMultiplier.Double
+        /// THEN the ToString method will return "Double 1"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf1WithDouble_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(1, SegmentMultiplier.Double);
+
+            // Assert
+            Assert.AreEqual("Double 1", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 1 and a SegmentMultiplier.Triple
+        /// THEN the ToString method will return "Triple 1"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf1WithTriple_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(1, SegmentMultiplier.Triple);
+
+            // Assert
+            Assert.AreEqual("Triple 1", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 20 and a SegmentMultiplier.Triple
+        /// THEN the ToString method will return "Triple 20"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf20WithTriple_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(20, SegmentMultiplier.Triple);
+
+            // Assert
+            Assert.AreEqual("Triple 20", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 20 and a SegmentMultiplier.Single
+        /// THEN the ToString method will return "Single 20"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf20WithSignle_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(20, SegmentMultiplier.Single);
+
+            // Assert
+            Assert.AreEqual("Single 20", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 20 and a SegmentMultiplier.Double
+        /// THEN the ToSTring method will return "Double 20"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf20WithDouble_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(20, SegmentMultiplier.Double);
+
+            // Assert
+            Assert.AreEqual("Double 20", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 25 and a SegmentMultiplier.Single
+        /// THEN the ToString method will return "Single Bull"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf25WithSignle_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(25, SegmentMultiplier.Single);
+
+            // Assert
+            Assert.AreEqual("Single Bull", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        /// <summary>
+        /// WHEN a Dart is instantiated with a BaseValue of 25 and a SegmentMultiplier.Double
+        /// THEN the ToString method will return "Double Bull"
+        /// </summary>
+        [TestMethod]
+        public void ToString_BaseValueOf25WithDouble_ReturnsExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Dart subject = new Dart(25, SegmentMultiplier.Double);
+
+            // Assert
+            Assert.AreEqual("Double Bull", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        #endregion
     }
 }
