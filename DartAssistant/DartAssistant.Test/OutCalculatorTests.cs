@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DartAssistant.Test
 {
@@ -45,6 +46,35 @@ namespace DartAssistant.Test
             // Assert
             Assert.AreEqual("DoubleOutSplitBullOuts", subject.GetType().Name, "Not expected class");
         }
+
+        /// <summary>
+        /// WHEN ever GetAllOuts is called when the calculator rule is Double out
+        /// THEN the math works out for all expected outs returned.
+        /// </summary>
+        [TestMethod]
+        public void GetAllOuts_WithDoubleOutRule_MathOfExpectedOutsWorks()
+        {
+            // Arrange
+            OutCalculator calculator = new OutCalculator(InOutRule.Double);
+
+            // Act
+            var subject = calculator.GetAllOuts();
+
+            // Assert
+            foreach(var keyValue in subject)
+            {
+                int total = 0;
+
+                foreach(Dart dart in keyValue.Value)
+                {
+                    total += dart.Value;
+                }
+
+                Assert.AreEqual(keyValue.Key, total, string.Format("Total did not match for {0}", keyValue.Key));
+                Assert.AreEqual(SegmentMultiplier.Double, keyValue.Value.LastOrDefault().Multiplier, "Last dart multiplier was not Double");
+            }
+        }
+
 
         #endregion
 
