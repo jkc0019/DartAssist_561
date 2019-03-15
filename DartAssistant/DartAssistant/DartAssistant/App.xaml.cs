@@ -1,12 +1,16 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Android.Content;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DartAssistant
 {
 	public partial class App : Application
 	{
+		//Lazy method to control number of times to listen for voice
+		public static int numberOfTimes = 0;
+
 		public App()
 		{
 			InitializeComponent();
@@ -28,5 +32,7 @@ namespace DartAssistant
 		{
 			// Handle when your app resumes
 		}
+
+		
 	}
 }

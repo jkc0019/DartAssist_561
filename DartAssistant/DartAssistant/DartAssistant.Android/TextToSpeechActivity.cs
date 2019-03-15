@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DartAssistant.Droid
 {
-	[Activity(Label = "TextToSpeechActivity", MainLauncher = true)]
+	[Activity(Label = "TextToSpeechActivity")]
 	public class TextToSpeechActivity : Activity, TextToSpeech.IOnInitListener
 	{
 		TextToSpeech textToSpeech;

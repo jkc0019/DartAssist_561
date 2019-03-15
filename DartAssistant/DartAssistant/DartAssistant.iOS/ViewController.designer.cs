@@ -13,9 +13,9 @@ namespace SpeakToMe
     [Register ("ViewController")]
     partial class ViewController
     {
-       //[Outlet]
-       //[GeneratedCode ("iOS Designer", "1.0")]
-       //UIKit.UITextView TextView2 { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextView TextView2 { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -29,10 +29,10 @@ namespace SpeakToMe
                 textView = null;
             }
 
-            //if (TextView2 != null) {
-            //    TextView2.Dispose ();
-            //    TextView2 = null;
-            //}
+            if (TextView2 != null) {
+                TextView2.Dispose ();
+                TextView2 = null;
+            }
         }
     }
 }

@@ -1,111 +1,115 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Speech;
-using Android.Speech.Tts;
+using System.Collections.Generic;
+using System.IO;
 
 namespace DartAssistant.Droid
 {
-    [Activity(Label = "DartAssistant", Icon = "@mipmap/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "DartAssistant", Icon = "@mipmap/icon", MainLauncher = true, Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
-		private bool isRecording;
 		private readonly int VOICE = 10;
-		private TextView textBox;
-		private Button recButton;
+		public static Context Context;
+		public static string speakThis = "";
+
+		//public static Activity thisActivity { get; set; }
+		internal static MainActivity Instance { get; private set; }
+		internal static Android.Content.Res.AssetManager assets { get; private set; }
 
 		protected override void OnCreate(Bundle bundle)
 		{
+			//thisActivity = this;
+			
 			base.OnCreate(bundle);
 
-			// set the isRecording flag to false (not recording)
-			isRecording = false;
+			//Pass parameters on to Application
+			global::Xamarin.Forms.Forms.Init(this, bundle);
+			Instance = this;
+			assets = this.Assets;
+			Xamarin.Forms.DependencyService.Register<IActivityHelper, ActivityHelper>();
+			LoadApplication(new App());
 
-			// Set our view from the "main" layout resource
-			SetContentView(Resource.Layout.Main);
-
-			// get the resources from the layout
-			recButton = FindViewById<Button>(Resource.Id.btnRecord);
-			textBox = FindViewById<TextView>(Resource.Id.textYourText);
-
-			// check to see if we can actually record - if we can, assign the event to the button
-			string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
-			if (rec != "android.hardware.microphone")
-			{
-				// no microphone, no recording. Disable the button and output an alert
-				var alert = new AlertDialog.Builder(recButton.Context);
-				alert.SetTitle("You don't seem to have a microphone to record with");
-				alert.SetPositiveButton("OK", (sender, e) =>
-				{
-					textBox.Text = "No microphone present";
-					recButton.Enabled = false;
-					return;
-				});
-
-				alert.Show();
-			}
-			else
-				recButton.Click += delegate
-				{
-					// change the text on the button
-					recButton.Text = "End Recording";
-					isRecording = !isRecording;
-					if (isRecording)
-					{
-						// create the intent and start the activity
-						var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-						voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
-
-						// put a message on the modal dialog
-						voiceIntent.PutExtra(RecognizerIntent.ExtraPrompt, Application.Context.GetString(Resource.String.messageSpeakNow));
-
-						// if there is more then 1.5s of silence, consider the speech over
-						voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
-						voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
-						voiceIntent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
-						voiceIntent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
-
-						// you can specify other languages recognised here, for example
-						// voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.German);
-						// if you wish it to recognise the default Locale language and German
-						// if you do use another locale, regional dialects may not be recognised very well
-
-						voiceIntent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
-						StartActivityForResult(voiceIntent, VOICE);
-					}
-				};
 		}
 
 		protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
 		{
+			//This is where the listener activity sends the voice recording info when it detects
+			//that the current dictation has ended. The actual recognition happens here
+			//and returns the score to look up to the MainPAge in the Xamarin shared code
+			//for converting to words and Text-to-Speech
 			if (requestCode == VOICE)
 			{
 				if (resultVal == Result.Ok)
 				{
+					
 					var matches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
 					if (matches.Count != 0)
 					{
-						string textInput = textBox.Text + matches[0];
+						string textInput = ""; 
+						textInput = matches[0];
 
-						// limit the output to 500 characters
-						if (textInput.Length > 500)
-							textInput = textInput.Substring(0, 500);
-						textBox.Text = textInput;
+						// limit the output to 100 characters
+						if (textInput.Length > 100)
+							textInput = textInput.Substring(0, 100);
+						
+						MainPage pgMainPage = new MainPage();
+						Int16 TotalScore = 0;
+						Int16 SingleScore = 0;
+
+						string fmtInput = textInput.Trim().ToLower();
+
+						if (fmtInput.Contains("out"))
+						{
+							fmtInput = textInput.Substring(0, textInput.Length - textInput.IndexOf("out"));
+
+							bool Result = false;
+							Result = Int16.TryParse(fmtInput, out TotalScore);
+
+							//If not an Int set an out of range value for Total Score
+							if (true != Result)
+							{
+								TotalScore = 200;
+							}
+
+							speakThis = pgMainPage.RecommendedOut(TotalScore);
+							//speakThis = "Speak Now";
+
+						}
+						else if (fmtInput.Contains("scored"))
+						{
+							//TODO 
+							//implement this after establishing total score tracking
+							fmtInput = textInput.Substring(0, textInput.Length - textInput.IndexOf("score"));
+
+							bool Result = false;
+							Result = Int16.TryParse(fmtInput, out SingleScore);
+
+							// If not an Int set an out of range value for Total Score
+ 							if (true != Result)
+							{
+								SingleScore = -1;
+							}
+
+							speakThis = pgMainPage.RecommendedOut(SingleScore);
+
+						}
+
+
+						pgMainPage.ReturnText(textInput);
+						
 					}
-					else
-						textBox.Text = "No speech was recognised";
-					// change the text back on the button
-					recButton.Text = "Start Recording";
+					
 				}
 			}
 
 			base.OnActivityResult(requestCode, resultVal, data);
 		}
+
+
 	}
 }

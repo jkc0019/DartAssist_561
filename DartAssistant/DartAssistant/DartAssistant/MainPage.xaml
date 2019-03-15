@@ -4,11 +4,26 @@
              xmlns:local="clr-namespace:DartAssistant"
              x:Class="DartAssistant.MainPage">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="Yellow">
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
+        <Label Text="Welcome to Take It Out! - Dart Assistant" 
+			   TextColor="SteelBlue"
+           HorizontalOptions="CenterAndExpand"
            VerticalOptions="CenterAndExpand" />
+		<!--Balance out layout with invisible button. -->
+		<Button Text="Empty2"
+                    Opacity="0"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center" />
+		<Button x:Name="StartGame" BackgroundColor="SteelBlue"
+					Text="Start" 
+                    Clicked="OnStartGameButtonClicked"
+                    HorizontalOptions="CenterAndExpand" />
+		<!--Balance out layout with invisible button. -->
+		<Button Text="Empty3"
+                    Opacity="0"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="Center" />
     </StackLayout>
 
 </ContentPage>

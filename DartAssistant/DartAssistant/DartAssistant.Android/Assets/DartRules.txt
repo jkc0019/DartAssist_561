@@ -1,0 +1,17 @@
+By far the most commonly used design of darts board today is the "clock" or "trebles" board and that is the only board that will be considered in these instructions.  A good board should be made from vegetable fibre and is called a "bristle board".  The pattern on the board is delineated by wire and hue.   It consists of a circle of 20 segments numbered from 1 to 20 in a seemingly random fashion.  At the centre is a small black circle called the "bullseye" and, surrounding that, a thin red ring called the 25 ring.  The segments spread out from this ring broken only by the "treble" ring about half way to the edge and "double" ring which marks the rim of the circle.  So, for instance, if a dart lands in the segment marked 14 and is within the treble ring, a "treble 14" has been scored.
+
+Each player has 3 darts which are front-weighted, flighted, weapons a few inches long with a sharp point.
+
+The board is placed so that the middle of the bullseye is 1.73m (5 feet, 8 inches) above the ground.  Players should stand behind a raised horizontal block called the "oche" (pronounced "okky") 38 mm (1 1/2 inches) high, although any mark on the ground will do for casual play.  The front of the oche should be 2.37m (7 feet, 9 and 1/4 inches) from the front of the board.
+
+501 and 301
+
+Most professional matches are "501 up".  This is the simplest of games.   Each player starts with a score of 501 and takes turns to throw 3 darts.  The score for each turn is calculated and deducted from the players total.  Bullseye scores 50, the outer ring scores 25 and a dart in the double or treble ring counts double or treble the segment score.  The objective is to be the first player to reduce the score to exactly zero, the only caveat being that the last dart thrown must land in a double or the bullseye.
+
+If a player reduces the score to 1 or goes below zero, the score is bust, that turn ends immediately and the score is returned to what it was at the start of that turn.  e.g. if a player has 32 to go out and the first dart is a 16, the second is a 15, the player is bust and the score is returned to 32.  So on the last turn, it is not necessary to throw all 3 darts - a player can win with the first or second dart of the turn.
+
+Because a player who misses a targeted double is likely to score the single of that segment, good players attempt to leave themselves with a repeatably bisectable number such as 24 or most ideally 32 - double 16. So for instance, if a player has double 16 left, and hits a 16, he has double 8 left and if he then hits an 8 he has double 4 left and so on - this is advantageous because no extra darts need to be thrown in order to reduce the score to an even number... It so often happens that people reduce their score to 1 (typically while aiming for double 1), some people play a very unofficial rule called "splitting the 11". This rule says that when the score is reduced to 1, instead of going bust, the player must "split the 11" by throwing a dart between the two numbers forming the number 11 on the edge of the board. This is tricky.
+
+301 is played in exactly the same way but players start the game with 301.  Some games require a double to start scoring as well as to finish the game.
+
+When the score goes below 171, professional players know the numbers to aim at order to check out in a single turn with 3 darts. There is a table of such combinations.
