@@ -10,20 +10,19 @@
 			   TextColor="SteelBlue"
            HorizontalOptions="CenterAndExpand"
            VerticalOptions="CenterAndExpand" />
-		<!--Balance out layout with invisible button. -->
-		<Button Text="Empty2"
-                    Opacity="0"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Center" />
-		<Button x:Name="StartGame" BackgroundColor="SteelBlue"
+        <Button x:Name="StartGame" BackgroundColor="SteelBlue"
 					Text="Start" 
                     Clicked="OnStartGameButtonClicked"
+                    HorizontalOptions="CenterAndExpand" 
+                    Margin="20"/>
+        <Entry x:Name="YourScore" Placeholder="Enter your score"/>
+        <Button x:Name="GetOut" BackgroundColor="SteelBlue"
+					Text="Get Out" 
+                    Clicked="OnGetOutClicked"
                     HorizontalOptions="CenterAndExpand" />
-		<!--Balance out layout with invisible button. -->
-		<Button Text="Empty3"
-                    Opacity="0"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Center" />
+        <Label x:Name="OutLabel" HorizontalOptions="Center"/>
+        <Label Text="All Outs:" HorizontalOptions="Center"/>
+        <ListView x:Name="MyList" />
     </StackLayout>
 
 </ContentPage>
