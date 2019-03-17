@@ -59,7 +59,7 @@ namespace DartAssistant
 
                 for (int j = 0; j < entry.Value.Count; j++)
                 {
-                    stringBuilder.Append(entry.Value[j].ToString());
+                    stringBuilder.Append(entry.Value[j].Abbreviation);
                     if (j != entry.Value.Count - 1)
                     {
                         stringBuilder.Append(", ");
@@ -84,7 +84,7 @@ namespace DartAssistant
 
             for(int i = 0; i < outs.Count; i++)
             {                                
-                stringBuilder.Append(outs[i].ToString());
+                stringBuilder.Append(outs[i].Abbreviation);
                 if (i != outs.Count - 1)
                 {
                     stringBuilder.Append(", ");
@@ -96,7 +96,13 @@ namespace DartAssistant
             OutLabel.Text = text;            
         }
 
-		private void OnStartGameButtonClicked(object sender, EventArgs args)
+        private void OnClearOutClicked(object sender, EventArgs args)
+        {
+            OutLabel.Text = "";
+            YourScore.Text = "";
+        }
+
+            private void OnStartGameButtonClicked(object sender, EventArgs args)
 		{
 			// Set # of times to listen (1 or -1 (for looping))
 			App.numberOfTimes = 1;
