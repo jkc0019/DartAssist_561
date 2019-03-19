@@ -41,9 +41,68 @@ namespace DartAssistant
 			{
 				LetsBegin();
 			}
+
+            InitializeOutChart();
 		}
 
-		private void OnStartGameButtonClicked(object sender, EventArgs args)
+        private void InitializeOutChart()
+        {
+            OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
+            List<String> allOutsList = new List<String>();
+            Dictionary<int, List<Dart>> allOuts = outCalculator.GetAllOuts();
+            // iterate through the dictionary to get all the outs
+            foreach (KeyValuePair<int, List<Dart>> entry in allOuts)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append(entry.Key.ToString());
+                stringBuilder.Append(": ");
+
+                for (int j = 0; j < entry.Value.Count; j++)
+                {
+                    stringBuilder.Append(entry.Value[j].Abbreviation);
+                    if (j != entry.Value.Count - 1)
+                    {
+                        stringBuilder.Append(", ");
+                    }
+                }
+
+                string outItemText = stringBuilder.ToString();
+                allOutsList.Add(outItemText);
+            }
+
+            MyList.ItemsSource = allOutsList;
+        }
+
+        private void OnGetOutClicked(object sender, EventArgs args)
+        {
+            string scoreStr = YourScore.Text;
+            int score = int.Parse(scoreStr);
+            OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
+            List<Dart> outs = outCalculator.GetDartsForOut(score);
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for(int i = 0; i < outs.Count; i++)
+            {                                
+                stringBuilder.Append(outs[i].Abbreviation);
+                if (i != outs.Count - 1)
+                {
+                    stringBuilder.Append(", ");
+                }
+            }
+
+            string text = stringBuilder.ToString();
+
+            OutLabel.Text = text;            
+        }
+
+        private void OnClearOutClicked(object sender, EventArgs args)
+        {
+            OutLabel.Text = "";
+            YourScore.Text = "";
+        }
+
+            private void OnStartGameButtonClicked(object sender, EventArgs args)
 		{
 			// Set # of times to listen (1 or -1 (for looping))
 			App.numberOfTimes = 1;

@@ -4,26 +4,29 @@
              xmlns:local="clr-namespace:DartAssistant"
              x:Class="DartAssistant.MainPage">
 
-    <StackLayout BackgroundColor="Yellow">
+    <StackLayout>
         <!-- Place new controls here -->
         <Label Text="Welcome to Take It Out! - Dart Assistant" 
-			   TextColor="SteelBlue"
+			   TextColor="Black"
            HorizontalOptions="CenterAndExpand"
            VerticalOptions="CenterAndExpand" />
-		<!--Balance out layout with invisible button. -->
-		<Button Text="Empty2"
-                    Opacity="0"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Center" />
-		<Button x:Name="StartGame" BackgroundColor="SteelBlue"
+        <Button x:Name="StartGame" BackgroundColor="DodgerBlue"
 					Text="Start" 
                     Clicked="OnStartGameButtonClicked"
-                    HorizontalOptions="CenterAndExpand" />
-		<!--Balance out layout with invisible button. -->
-		<Button Text="Empty3"
-                    Opacity="0"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="Center" />
+                    HorizontalOptions="CenterAndExpand" 
+                    Margin="10"/>
+        <Entry x:Name="YourScore" Placeholder="Enter your score" Keyboard="Numeric"/>
+        <StackLayout Orientation="Horizontal" Padding="10">
+            <Button x:Name="GetOut" BackgroundColor="DodgerBlue"
+					Text="Get Out" 
+                    Clicked="OnGetOutClicked" HorizontalOptions="StartAndExpand" />
+            <Button x:Name="ClearOut" BackgroundColor="DodgerBlue"
+					Text="Clear" 
+                    Clicked="OnClearOutClicked" HorizontalOptions="EndAndExpand" />
+        </StackLayout>
+        <Label x:Name="OutLabel" HorizontalOptions="Center"/>
+        <Label Text="All Outs:" HorizontalOptions="Center"/>
+        <ListView x:Name="MyList" RowHeight="30" SeparatorColor="#999" BackgroundColor="#EEE" />
     </StackLayout>
 
 </ContentPage>
