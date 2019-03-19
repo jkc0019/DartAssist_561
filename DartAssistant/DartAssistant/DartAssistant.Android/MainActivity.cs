@@ -2,11 +2,9 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Widget;
+using Android.Util;
 using Android.OS;
 using Android.Speech;
-using System.Collections.Generic;
-using System.IO;
 
 namespace DartAssistant.Droid
 {
@@ -109,7 +107,41 @@ namespace DartAssistant.Droid
 
 			base.OnActivityResult(requestCode, resultVal, data);
 		}
+		protected override void OnDestroy()
+		{
+			Log.Debug(GetType().FullName, "MainActivity - On Destroy");
+			base.OnDestroy();
+		}
 
+		protected override void OnPause()
+		{
+			Log.Debug(GetType().FullName, "MainActivity - OnPause");
+			base.OnPause();
+		}
+
+		protected override void OnRestart()
+		{
+			Log.Debug(GetType().FullName, "MainActivity - OnRestart");
+			base.OnRestart();
+		}
+
+		protected override void OnResume()
+		{
+			Log.Debug(GetType().FullName, "MainActivity - OnResume");
+			base.OnResume();
+		}
+
+		protected override void OnStart()
+		{
+			Log.Debug(GetType().FullName, "MainActivity - OnStart");
+			base.OnStart();
+		}
+
+		protected override void OnStop()
+		{
+			Log.Debug(GetType().FullName, "MainActivity - OnStop");
+			base.OnStop();
+		}
 
 	}
 }

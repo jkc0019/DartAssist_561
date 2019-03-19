@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
 
+
 namespace DartAssistant.Droid
 {
     public class ActivityHelper : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IActivityHelper
 	{
 		private readonly int VOICE = 10;
 		public string SpokeText = "";
+
+		SpeechRecognizer Recognizer { get; set; }
 
 		public string GetVersionNumber()
         {
@@ -24,7 +27,9 @@ namespace DartAssistant.Droid
         }
 		public string Listen()
 		{
-			
+			//var recListener = new RecognitionListener();
+			//https://stackoverflow.com/questions/48934239/c-sharp-xamarin-speech-recognition-in-the-background-android
+
 			// create the intent and start the activity
 			var voiceIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
 			voiceIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
