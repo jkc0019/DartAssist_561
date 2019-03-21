@@ -11,7 +11,7 @@ using Xamarin.Essentials;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DartAssistant.Droid
+namespace DartAssistant.Droid.Source.Activities
 {
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class AndroidActivity : Activity
@@ -63,14 +63,16 @@ namespace DartAssistant.Droid
 			var txtYourScore = FindViewById<Android.Widget.EditText>(Resource.Id.YourScore);
 			txtYourScore.Click += txtYourScore_Click;
 
-			Log.Debug(nameof(AndroidActivity), nameof(OnCreate));
+            var BtnSeeOutChart = FindViewById<Android.Widget.Button>(Resource.Id.btn_SeeOutChart);
+            BtnSeeOutChart.Click += delegate {
+                StartActivity(typeof(OutChartActivity));
+            };
+
+            Log.Debug(nameof(AndroidActivity), nameof(OnCreate));
 			mList.Add("Start");
 			Forms.Init(this,savedInstanceState);
 
-			mAudioManager = (AudioManager)GetSystemService(Context.AudioService);
-
-			InitializeOutChart();
-			
+			mAudioManager = (AudioManager)GetSystemService(Context.AudioService);			
 		}
 
 		private void BtnStartSpeech_Click(object sender, System.EventArgs e)
@@ -87,36 +89,6 @@ namespace DartAssistant.Droid
 			}
 
 			StartTimer();
-		}
-
-		private void InitializeOutChart()
-		{
-			OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
-			List<String> allOutsList = new List<String>();
-			Dictionary<int, List<Dart>> allOuts = outCalculator.GetAllOuts();
-			// iterate through the dictionary to get all the outs
-			foreach (KeyValuePair<int, List<Dart>> entry in allOuts)
-			{
-				StringBuilder stringBuilder = new StringBuilder();
-				stringBuilder.Append(entry.Key.ToString());
-				stringBuilder.Append(": ");
-
-				for (int j = 0; j < entry.Value.Count; j++)
-				{
-					stringBuilder.Append(entry.Value[j].Abbreviation);
-					if (j != entry.Value.Count - 1)
-					{
-						stringBuilder.Append(", ");
-					}
-				}
-
-				string outItemText = stringBuilder.ToString();
-				allOutsList.Add(outItemText);
-			}
-
-			Android.Widget.ListView lstMyList = (Android.Widget.ListView)FindViewById<Android.Widget.ListView>(Resource.Id.MyList);
-			lstMyList.Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, allOutsList);
-
 		}
 
 		private void txtYourScore_Click(object sender, System.EventArgs e)

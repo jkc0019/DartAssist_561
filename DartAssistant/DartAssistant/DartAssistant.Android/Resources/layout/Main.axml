@@ -43,11 +43,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="40sp"
 			android:padding="10sp"
-			/>
-			<TextView android:id="@+id/ph" 
-			android:layout_width="50sp"
-			android:layout_height="40sp"
-			/>
+			/>			
 			<Button android:id="@+id/btn_Clear"
 			android:text="Clear"
 			android:layout_width="wrap_content"
@@ -56,7 +52,7 @@
 			/>
         </LinearLayout>
 	<TextView
-		android:text="Out Label"
+		android:text=""
 		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:textAlignment="center"
 		android:textColor="#FFFF00"
@@ -64,16 +60,10 @@
 		android:layout_height="wrap_content"
 		android:padding="10sp"
 		android:id="@+id/txtOutLabel"/>
-	<TextView
-		android:text="All Outs:"
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:textAlignment="center"
-		android:padding="10sp"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content" 
-		android:id="@+id/textAllOuts" />
-	<ListView android:id="@+id/MyList"
-		android:layout_width="wrap_content"
-		android:layout_height="180sp"
-	/>
+	<Button android:id="@+id/btn_SeeOutChart" 
+			android:text="See Out Chart"
+			android:layout_width="wrap_content"
+			android:layout_height="40sp"
+			android:padding="10sp"
+			/>	
 	</LinearLayout>
