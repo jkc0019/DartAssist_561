@@ -6,7 +6,7 @@ using Android.Support.V7.App;
 
 namespace DartAssistant.Droid.Source.Activities
 {
-	[Activity(Label = "Activity4")]
+	[Activity(Label = "Scores")]
 	public class Activity4 : AppCompatActivity
 	{
 		BottomNavigationView bottomNavigation;
@@ -31,6 +31,18 @@ namespace DartAssistant.Droid.Source.Activities
 
 
 			bottomNavigation.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
+
+			try
+			{
+
+				bottomNavigation.Menu.GetItem(3).SetChecked(true);
+
+			}
+			catch (System.Exception ex)
+			{
+
+				System.Diagnostics.Debug.Print("Heya:" + ex.Message);
+			}
 
 		}
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)

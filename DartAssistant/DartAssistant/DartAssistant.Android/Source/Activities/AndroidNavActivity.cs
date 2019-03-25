@@ -17,7 +17,7 @@ using Android.Support.V7.App;
 namespace DartAssistant.Droid.Source.Activities
 {
 	//, MainLauncher = true
-	[Activity(Label = "AndroidNavActivity")]
+	[Activity(Label = "@string/app_name", MainLauncher = true)]
 	public class AndroidNavActivity : AppCompatActivity
 	{
 		SpeechRecognizer Recognizer { get; set; }
@@ -94,6 +94,18 @@ namespace DartAssistant.Droid.Source.Activities
 
 
 			bottomNavigation.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
+
+			try
+			{
+
+				bottomNavigation.Menu.GetItem(0).SetChecked(true);
+
+			}
+			catch (System.Exception ex)
+			{
+
+				System.Diagnostics.Debug.Print("Heya:" + ex.Message);
+			}
 		}
 
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)

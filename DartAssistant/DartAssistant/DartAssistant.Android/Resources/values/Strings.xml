@@ -2,18 +2,15 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Take it Out!</string>
-
 	<string name="messageSpeakNow">Speak now!</string>
-
-  <string name="app_name">TabsApp</string>
   <string name="fragment1">This is the first tab.</string>
   <string name="fragment2">This is the second tab.</string>
   <string name="fragment3">This is the third tab.</string>
   <string name="fragment4">This is the fourth tab.</string>
   <string name="fragment5">This is the fifth tab.</string>
-  <string name="tab1_title">Tab1</string>
-  <string name="tab2_title">Tab2</string>
-  <string name="tab3_title">Tab3</string>
-  <string name="tab4_title">Tab4</string>
-  <string name="tab5_title">Tab5</string>
+  <string name="tab1_title">Start</string>
+  <string name="tab2_title">Chart</string>
+  <string name="tab3_title">Rules</string>
+  <string name="tab4_title">Scores</string>
+  <string name="tab5_title">End</string>
 </resources>

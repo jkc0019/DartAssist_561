@@ -4,34 +4,34 @@
   <item
       android:id="@+id/menu_home"
       android:enabled="true"
-      android:icon="@drawable/ic_action_home"
+      android:icon="@drawable/dartman"
       android:title="@string/tab1_title"
       app:showAsAction="ifRoom" />
 
   <item
       android:id="@+id/menu_audio"
       android:enabled="true"
-      android:icon="@drawable/ic_action_audiotrack"
+      android:icon="@drawable/chart"
       android:title="@string/tab2_title"
       app:showAsAction="ifRoom" />
 
   <item
       android:id="@+id/menu_video"
       android:enabled="true"
-      android:icon="@drawable/ic_action_videocam"
+      android:icon="@drawable/rules"
       android:title="@string/tab3_title"
       app:showAsAction="ifRoom" />
   <item
     android:id="@+id/menu_scores"
     android:enabled="true"
-    android:icon="@drawable/ic_action_audiotrack"
-    android:title="@string/tab2_title"
+    android:icon="@drawable/scores"
+    android:title="@string/tab4_title"
     app:showAsAction="ifRoom" />
 
   <item
       android:id="@+id/menu_info"
       android:enabled="true"
-      android:icon="@drawable/ic_action_videocam"
-      android:title="@string/tab3_title"
+      android:icon="@drawable/stop"
+      android:title="@string/tab5_title"
       app:showAsAction="ifRoom" />
 </menu>

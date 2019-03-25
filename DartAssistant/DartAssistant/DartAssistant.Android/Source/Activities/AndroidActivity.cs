@@ -14,7 +14,7 @@ using System.Text;
 namespace DartAssistant.Droid.Source.Activities
 {
 	//, MainLauncher = true
-	[Activity(Label = "@string/app_name", MainLauncher = true)]
+	[Activity(Label = "@string/app_name")]
     public class AndroidActivity : Activity
 	{
         SpeechRecognizer Recognizer { get; set; }
@@ -76,7 +76,7 @@ namespace DartAssistant.Droid.Source.Activities
 			Forms.Init(this,savedInstanceState);
 
 			mAudioManager = (AudioManager)GetSystemService(Context.AudioService);
-
+			
 		}
 
 		private void BtnStartSpeech_Click(object sender, System.EventArgs e)
