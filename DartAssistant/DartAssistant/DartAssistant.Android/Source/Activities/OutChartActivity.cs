@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
+
 
 namespace DartAssistant.Droid.Source.Activities
 {
     [Activity(Label = "Out Chart")]
     public class OutChartActivity : Activity
-    {
-        protected override void OnCreate(Bundle savedInstanceState)
+	{
+		
+		protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -27,9 +24,10 @@ namespace DartAssistant.Droid.Source.Activities
 
             // Create your application here
             InitializeOutChart();
-        }
 
-        private void InitializeOutChart()
+		}
+
+		private void InitializeOutChart()
         {
             OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
             List<String> allOutsList = new List<String>();
