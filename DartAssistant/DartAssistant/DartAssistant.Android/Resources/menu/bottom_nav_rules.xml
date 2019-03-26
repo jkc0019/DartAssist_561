@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/menu_back"
+      android:enabled="true"
+      android:icon="@drawable/ic_action_home"
+      android:title="@string/rulestab1_title"
+      app:showAsAction="ifRoom" />
+
+  <item
+      android:id="@+id/menu_OutGames"
+      android:enabled="true"
+      android:icon="@drawable/dartboard2"
+      android:title="@string/rulestab2_title"
+      app:showAsAction="ifRoom" />
+
+  <item
+      android:id="@+id/menu_cricket"
+      android:enabled="true"
+      android:icon="@drawable/dartboard1"
+      android:title="@string/rulestab3_title"
+      app:showAsAction="ifRoom" />
+
+</menu>

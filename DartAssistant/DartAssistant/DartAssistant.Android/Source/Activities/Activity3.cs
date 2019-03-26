@@ -1,6 +1,8 @@
-﻿using Android.App;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Android.App;
 using Android.OS;
-
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 
@@ -11,13 +13,14 @@ namespace DartAssistant.Droid.Source.Activities
 	public class Activity3 : AppCompatActivity
 	{
 		BottomNavigationView bottomNavigation;
-	
+		internal static Android.Content.Res.AssetManager assets { get; private set; }
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
-			SetContentView(Resource.Layout.NavMain);
+			SetContentView(Resource.Layout.NavRules);
 
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			if (toolbar != null)
@@ -36,7 +39,7 @@ namespace DartAssistant.Droid.Source.Activities
 			try
 			{
 
-				bottomNavigation.Menu.GetItem(2).SetChecked(true);
+				bottomNavigation.Menu.GetItem(0).SetChecked(true);
 
 			}
 			catch (System.Exception ex)
@@ -44,9 +47,11 @@ namespace DartAssistant.Droid.Source.Activities
 
 				System.Diagnostics.Debug.Print("Heya:" + ex.Message);
 			}
-			
+
+
+			assets = this.Assets;
 		}
-		
+
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
 		{
 			LoadFragment(e.Item.ItemId);
@@ -59,20 +64,14 @@ namespace DartAssistant.Droid.Source.Activities
 			switch (id)
 			{
 				
-				case Resource.Id.menu_home:
+				case Resource.Id.menu_back:
 					StartActivity(typeof(AndroidNavActivity));
 					break;
-				case Resource.Id.menu_audio:
-					StartActivity(typeof(OutChartNavActivity));
+				case Resource.Id.menu_OutGames:
+					fragment = fragRules1.NewInstance();
 					break;
-				case Resource.Id.menu_video:
-					//fragment = Fragment3.NewInstance();
-					break;
-				case Resource.Id.menu_scores:
-					StartActivity(typeof(Activity4));
-					break;
-				case Resource.Id.menu_info:
-					StartActivity(typeof(Activity5));
+				case Resource.Id.menu_cricket:
+					fragment = fragRules2.NewInstance();
 					break;
 			}
 			if (fragment == null)
@@ -82,5 +81,42 @@ namespace DartAssistant.Droid.Source.Activities
 			   .Replace(Resource.Id.content_frame, fragment)
 			   .Commit();
 		}
+
+		public List<string> GetStoredInfo(string infoFile)
+		{
+			//Used to get the contents from the Android Assests and return a List
+
+			List<string> infoFromFile = new List<string>();
+			string content;
+
+			try
+			{
+				//AndroidNavActivity activity = new AndroidNavActivity();
+				//Android.Content.Res.AssetManager assets = AndroidNavActivity.assets;
+
+				using (StreamReader sr = new StreamReader(assets.Open(infoFile)))
+
+				{
+
+					while ((content = sr.ReadLine()) != null)
+					{
+
+						infoFromFile.Add(content.ToString());
+
+					}
+				}
+
+				return infoFromFile;
+			}
+			catch (Exception ex)
+			{
+				//Used for Debugging
+				System.Diagnostics.Debug.Print("Error- " + ex.Message);
+				throw (ex);
+			}
+
+		}
+
+
 	}
 }

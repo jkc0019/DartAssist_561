@@ -56,7 +56,7 @@ namespace DartAssistant.Droid
 
 		public List<string> GetStoredInfo(string infoFile)
 		{
-			//Used to get the contents from the Android Assests and retun a List
+			//Used to get the contents from the Android Assests and return a List
 
 			List<string> infoFromFile = new List<string>();
 			string content;

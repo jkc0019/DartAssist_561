@@ -106,6 +106,7 @@ namespace DartAssistant.Droid.Source.Activities
 
 				System.Diagnostics.Debug.Print("Heya:" + ex.Message);
 			}
+
 		}
 
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
@@ -120,10 +121,10 @@ namespace DartAssistant.Droid.Source.Activities
 			{
 				case Resource.Id.menu_home:
 					break;
-				case Resource.Id.menu_audio:
+				case Resource.Id.menu_chart:
 					StartActivity(typeof(OutChartNavActivity));
 					break;
-				case Resource.Id.menu_video:
+				case Resource.Id.menu_rules:
 					StartActivity(typeof(Activity3));
 					break;
 				case Resource.Id.menu_scores:

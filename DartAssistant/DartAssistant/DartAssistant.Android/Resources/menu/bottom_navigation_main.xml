@@ -7,16 +7,15 @@
       android:icon="@drawable/dartman"
       android:title="@string/tab1_title"
       app:showAsAction="ifRoom" />
-
   <item
-      android:id="@+id/menu_audio"
+      android:id="@+id/menu_chart"
       android:enabled="true"
       android:icon="@drawable/chart"
       android:title="@string/tab2_title"
       app:showAsAction="ifRoom" />
 
   <item
-      android:id="@+id/menu_video"
+      android:id="@+id/menu_rules"
       android:enabled="true"
       android:icon="@drawable/rules"
       android:title="@string/tab3_title"

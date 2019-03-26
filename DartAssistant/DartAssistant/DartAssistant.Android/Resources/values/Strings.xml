@@ -3,14 +3,15 @@
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Take it Out!</string>
 	<string name="messageSpeakNow">Speak now!</string>
-  <string name="fragment1">This is the first tab.</string>
-  <string name="fragment2">This is the second tab.</string>
-  <string name="fragment3">This is the third tab.</string>
-  <string name="fragment4">This is the fourth tab.</string>
-  <string name="fragment5">This is the fifth tab.</string>
+  <string name="fragRules1">This is the first tab.</string>
+  <string name="fragRules2">This is the second tab.</string>
+  <string name="fragRules3">This is the third tab.</string>
   <string name="tab1_title">Start</string>
   <string name="tab2_title">Chart</string>
   <string name="tab3_title">Rules</string>
   <string name="tab4_title">Scores</string>
   <string name="tab5_title">End</string>
+  <string name="rulestab1_title">Back</string>
+  <string name="rulestab2_title">301/501</string>
+  <string name="rulestab3_title">Cricket</string>
 </resources>

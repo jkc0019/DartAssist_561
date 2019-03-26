@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:text="@string/fragRules1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:id="@+id/textViewXX"
+        android:gravity="center" />
+
+		<android.webkit.WebView
+		android:layout_width="match_parent"
+		android:layout_height="500sp"
+		android:id="@+id/wvw_Rules" />
+</LinearLayout>

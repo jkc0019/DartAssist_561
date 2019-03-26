@@ -73,9 +73,9 @@ namespace DartAssistant.Droid.Source.Activities
 				case Resource.Id.menu_home:
 					StartActivity(typeof(AndroidNavActivity));
 					break;
-				case Resource.Id.menu_audio:
+				case Resource.Id.menu_chart:
 					break;
-				case Resource.Id.menu_video:
+				case Resource.Id.menu_rules:
 					StartActivity(typeof(Activity3));
 					break;
 				case Resource.Id.menu_scores:

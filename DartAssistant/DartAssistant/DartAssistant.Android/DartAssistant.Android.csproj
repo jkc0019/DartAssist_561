@@ -73,6 +73,9 @@
     <Compile Include="Source\Activities\AndroidNavActivity.cs" />
     <Compile Include="Source\Activities\OutChartActivity.cs" />
     <Compile Include="Source\Activities\OutChartNavActivity.cs" />
+    <Compile Include="Source\Fragments\fragRules1.cs" />
+    <Compile Include="Source\Fragments\fragRules2.cs" />
+    <Compile Include="Source\Fragments\fragRules3.cs" />
     <Compile Include="Source\Listeners\RecognitionListener.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,11 +102,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\NavMain.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DartAssistant\DartAssistant.csproj">
       <Project>{54EC2092-06F4-4798-9868-7A10710FE7D1}</Project>
       <Name>DartAssistant</Name>
@@ -111,9 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\DartRules.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -282,6 +277,30 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\bottom_nav_rules.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\NavMain.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\NavRules.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragRules1.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragRules2.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragRules3.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\DartRules.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\CricketRules.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
