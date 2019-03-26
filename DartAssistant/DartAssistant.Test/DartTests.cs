@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace DartAssistant.Test
 {
@@ -574,6 +575,98 @@ namespace DartAssistant.Test
 
             // Assert
             Assert.AreEqual("Double Bull", subject.ToString(), "ToString did not return the expected value");
+        }
+
+        #endregion
+
+        #region IsValidScore(int)
+
+        /// <summary>
+        /// WHEN a valid score is passed in
+        /// THEN true is returned.
+        /// </summary>
+        [TestMethod]
+        public void IsValidScore_ValidScores_ReturnsTrue()
+        {
+            // Arrange
+            List<int> validValues = new List<int>
+            { 0, 1, 21, 25, 33, 42, 50, 57, 60 };
+
+            foreach (int item in validValues)
+            {
+                // Act
+                bool result = Dart.IsValidScore(item);
+
+                // Assert
+                Assert.IsTrue(result, string.Format("{0} was expected to be valid", item));
+            }
+        }
+
+        /// <summary>
+        /// WHEN an invalid score is passed in
+        /// THEN false is returned.
+        /// </summary>
+        [TestMethod]
+        public void IsValidScore_InvalidScores_ReturnsFalse()
+        {
+            // Arrange
+            List<int> invalidValues = new List<int>
+            { -1, 23, 29, 35, 43, 52, 59, 61, 100 };
+
+            foreach (int item in invalidValues)
+            {
+                // Act
+                bool result = Dart.IsValidScore(item);
+
+                // Assert
+                Assert.IsFalse(result, string.Format("{0} was expected to be invalid", item));
+            }
+        }
+
+        #endregion
+
+        #region IsValidDouble(int)
+
+        /// <summary>
+        /// WHEN valid points are passed in
+        /// THEN true is returned.
+        /// </summary>
+        [TestMethod]
+        public void IsValidDouble_ValidScores_ReturnsTrue()
+        {
+            // Arrange
+            List<int> validValues = new List<int>
+            { 2, 4, 16, 20, 30, 40, 50 };
+
+            foreach (int val in validValues)
+            {
+                // Act
+                bool result = Dart.IsValidDouble(val);
+
+                // Assert
+                Assert.IsTrue(result, string.Format("{0} was expected to be valid", val));
+            }
+        }
+
+        /// <summary>
+        /// WHEN invalid points are passed in
+        /// THEN false is returned.
+        /// </summary>
+        [TestMethod]
+        public void IsValidDouble_InvalidScores_ReturnsFalse()
+        {
+            // Arrange
+            List<int> validValues = new List<int>
+            { 0, 1, 17, 21, 31, 39, 41, 49, 51 };
+
+            foreach (int val in validValues)
+            {
+                // Act
+                bool result = Dart.IsValidDouble(val);
+
+                // Assert
+                Assert.IsFalse(result, string.Format("{0} was expected to be invalid", val));
+            }
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace DartAssistant
@@ -180,6 +181,58 @@ namespace DartAssistant
             }
 
             return "Miss";
+        }
+
+        /// <summary>
+        /// Determines if the provided points are valid for a single dart.
+        /// </summary>
+        /// <param name="points">The value that is to be checked.</param>
+        /// <returns>True if the points are valid, otherwise false.</returns>
+        public static bool IsValidScore(int points)
+        {
+            // Account for miss, and bull values.
+            List<int> validValues = new List<int> { 0, 25, 50 };
+
+            // Loop through the others.
+            for(int i = 1; i <= 20; i++)
+            {
+                Dart single = new Dart(i, SegmentMultiplier.Single);
+                Dart dbl = new Dart(i, SegmentMultiplier.Double);
+                Dart triple = new Dart(i, SegmentMultiplier.Triple);
+
+                validValues.Add(single.Value);
+                validValues.Add(dbl.Value);
+                validValues.Add(triple.Value);
+            }
+
+            // Make the determination if it is a valid value.
+            return validValues.Contains(points);
+        }
+
+        /// <summary>
+        /// Determines if the provided points are a valid double value for a single dart.
+        /// </summary>
+        /// <param name="points">The points that are to be checked.</param>
+        /// <returns>True if the points are valid, otherwise false.</returns>
+        public static bool IsValidDouble(int points)
+        {
+            // List of the valid values.
+            List<int> validDoubles = new List<int>();
+
+            // Double bull.
+            Dart dblBull = new Dart(25, SegmentMultiplier.Double);
+            validDoubles.Add(dblBull.Value);
+
+            // Loop through the others.
+            for(int i = 1; i <= 20; i++)
+            {
+                Dart dbl = new Dart(i, SegmentMultiplier.Double);
+
+                validDoubles.Add(dbl.Value);
+            }
+
+            // Make the determination if it is a valid double.
+            return validDoubles.Contains(points);
         }
 
         #endregion
