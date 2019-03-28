@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DartAssistant
+﻿namespace DartAssistant
 {
     /// <summary>
     /// Represents an individuals turn at an 01 game of darts (3 darts).
@@ -16,32 +14,44 @@ namespace DartAssistant
         /// <summary>
         /// Gets the current score after any number of darts has been recorded.
         /// </summary>
-        public int CurrentScore { get; private set; }
+        public int CurrentScore { get; set; }
 
         /// <summary>
         /// Gets the number of darts remaining to be thrown/recorded for the turn.
         /// </summary>
-        public int DartsRemaining { get; private set; }
+        public int DartsRemaining { get; set; }
 
         /// <summary>
         /// Gets the Out Rule that is being utilized for the turn.
         /// </summary>
-        public InOutRule Rule { get; private set; }
+        public InOutRule Rule { get; set; }
 
         /// <summary>
         /// Gets the value of the score at the start of the turn.
         /// </summary>
-        public int StartingScore { get; private set; }
+        public int StartingScore { get; set; }
 
         /// <summary>
         /// Gets the value that indicates the current state of the turn.
         /// </summary>
-        public TurnState State { get; private set; }
+        public TurnState State { get; set; }
 
         #endregion
 
         #region Constructor
 
+        /// <summary>
+        /// Default constructor to allow for Deserialization.
+        /// </summary>
+        public Turn()
+        {
+
+        }
+
+        /// <summary>
+        /// Constructor to allow for setting of the InOutRule during initialization.
+        /// </summary>
+        /// <param name="rule">The Out rule to follow for calculations.</param>
         public Turn(InOutRule rule)
         {
             Rule = rule;
