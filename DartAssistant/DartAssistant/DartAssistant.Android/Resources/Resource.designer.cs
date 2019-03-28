@@ -3121,14 +3121,17 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090033
 			public const int CTRL = 2131296307;
 			
+			// aapt resource value: 0x7f0900c6
+			public const int DartScore = 2131296454;
+			
 			// aapt resource value: 0x7f090034
 			public const int FUNCTION = 2131296308;
 			
 			// aapt resource value: 0x7f090035
 			public const int META = 2131296309;
 			
-			// aapt resource value: 0x7f0900c5
-			public const int MyList = 2131296453;
+			// aapt resource value: 0x7f0900cb
+			public const int MyList = 2131296459;
 			
 			// aapt resource value: 0x7f090036
 			public const int SHIFT = 2131296310;
@@ -3136,11 +3139,14 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090037
 			public const int SYM = 2131296311;
 			
+			// aapt resource value: 0x7f0900c4
+			public const int StartScore = 2131296452;
+			
 			// aapt resource value: 0x7f09009d
 			public const int YourScore = 2131296413;
 			
-			// aapt resource value: 0x7f0900c9
-			public const int action0 = 2131296457;
+			// aapt resource value: 0x7f0900cf
+			public const int action0 = 2131296463;
 			
 			// aapt resource value: 0x7f09007c
 			public const int action_bar = 2131296380;
@@ -3163,17 +3169,17 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09005a
 			public const int action_bar_title = 2131296346;
 			
-			// aapt resource value: 0x7f0900c6
-			public const int action_container = 2131296454;
+			// aapt resource value: 0x7f0900cc
+			public const int action_container = 2131296460;
 			
 			// aapt resource value: 0x7f09007d
 			public const int action_context_bar = 2131296381;
 			
-			// aapt resource value: 0x7f0900cd
-			public const int action_divider = 2131296461;
+			// aapt resource value: 0x7f0900d3
+			public const int action_divider = 2131296467;
 			
-			// aapt resource value: 0x7f0900c7
-			public const int action_image = 2131296455;
+			// aapt resource value: 0x7f0900cd
+			public const int action_image = 2131296461;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -3190,11 +3196,11 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09005c
 			public const int action_mode_close_button = 2131296348;
 			
-			// aapt resource value: 0x7f0900c8
-			public const int action_text = 2131296456;
+			// aapt resource value: 0x7f0900ce
+			public const int action_text = 2131296462;
 			
-			// aapt resource value: 0x7f0900d6
-			public const int actions = 2131296470;
+			// aapt resource value: 0x7f0900dc
+			public const int actions = 2131296476;
 			
 			// aapt resource value: 0x7f09005d
 			public const int activity_chooser_view_content = 2131296349;
@@ -3235,17 +3241,23 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f0900c2
 			public const int bottom_navigation = 2131296450;
 			
-			// aapt resource value: 0x7f0900d9
-			public const int btn_Back = 2131296473;
+			// aapt resource value: 0x7f0900df
+			public const int btn_Back = 2131296479;
 			
 			// aapt resource value: 0x7f0900a0
 			public const int btn_Clear = 2131296416;
+			
+			// aapt resource value: 0x7f0900c7
+			public const int btn_DartScored = 2131296455;
 			
 			// aapt resource value: 0x7f09009f
 			public const int btn_GetOut = 2131296415;
 			
 			// aapt resource value: 0x7f0900a2
 			public const int btn_SeeOutChart = 2131296418;
+			
+			// aapt resource value: 0x7f0900c5
+			public const int btn_StartTurn = 2131296453;
 			
 			// aapt resource value: 0x7f0900c3
 			public const int btn_spacer = 2131296451;
@@ -3256,8 +3268,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090063
 			public const int buttonPanel = 2131296355;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int cancel_action = 2131296458;
+			// aapt resource value: 0x7f0900d0
+			public const int cancel_action = 2131296464;
 			
 			// aapt resource value: 0x7f090045
 			public const int center = 2131296325;
@@ -3271,8 +3283,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090073
 			public const int checkbox = 2131296371;
 			
-			// aapt resource value: 0x7f0900d2
-			public const int chronometer = 2131296466;
+			// aapt resource value: 0x7f0900d8
+			public const int chronometer = 2131296472;
 			
 			// aapt resource value: 0x7f09004e
 			public const int clip_horizontal = 2131296334;
@@ -3331,8 +3343,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090030
 			public const int end = 2131296304;
 			
-			// aapt resource value: 0x7f0900d8
-			public const int end_padder = 2131296472;
+			// aapt resource value: 0x7f0900de
+			public const int end_padder = 2131296478;
 			
 			// aapt resource value: 0x7f09003f
 			public const int enterAlways = 2131296319;
@@ -3376,8 +3388,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090062
 			public const int icon = 2131296354;
 			
-			// aapt resource value: 0x7f0900d7
-			public const int icon_group = 2131296471;
+			// aapt resource value: 0x7f0900dd
+			public const int icon_group = 2131296477;
 			
 			// aapt resource value: 0x7f09003a
 			public const int ifRoom = 2131296314;
@@ -3385,8 +3397,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09005f
 			public const int image = 2131296351;
 			
-			// aapt resource value: 0x7f0900d3
-			public const int info = 2131296467;
+			// aapt resource value: 0x7f0900d9
+			public const int info = 2131296473;
 			
 			// aapt resource value: 0x7f090059
 			public const int italic = 2131296345;
@@ -3418,38 +3430,38 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f0900bd
 			public const int main_content = 2131296445;
 			
-			// aapt resource value: 0x7f0900dd
-			public const int masked = 2131296477;
+			// aapt resource value: 0x7f0900e3
+			public const int masked = 2131296483;
 			
-			// aapt resource value: 0x7f0900cc
-			public const int media_actions = 2131296460;
-			
-			// aapt resource value: 0x7f0900df
-			public const int menu_OutGames = 2131296479;
-			
-			// aapt resource value: 0x7f0900de
-			public const int menu_back = 2131296478;
-			
-			// aapt resource value: 0x7f0900e2
-			public const int menu_chart = 2131296482;
-			
-			// aapt resource value: 0x7f0900e0
-			public const int menu_cricket = 2131296480;
-			
-			// aapt resource value: 0x7f0900e1
-			public const int menu_home = 2131296481;
+			// aapt resource value: 0x7f0900d2
+			public const int media_actions = 2131296466;
 			
 			// aapt resource value: 0x7f0900e5
-			public const int menu_info = 2131296485;
-			
-			// aapt resource value: 0x7f0900e3
-			public const int menu_rules = 2131296483;
+			public const int menu_OutGames = 2131296485;
 			
 			// aapt resource value: 0x7f0900e4
-			public const int menu_scores = 2131296484;
+			public const int menu_back = 2131296484;
 			
-			// aapt resource value: 0x7f0900db
-			public const int message = 2131296475;
+			// aapt resource value: 0x7f0900e8
+			public const int menu_chart = 2131296488;
+			
+			// aapt resource value: 0x7f0900e6
+			public const int menu_cricket = 2131296486;
+			
+			// aapt resource value: 0x7f0900e7
+			public const int menu_home = 2131296487;
+			
+			// aapt resource value: 0x7f0900eb
+			public const int menu_info = 2131296491;
+			
+			// aapt resource value: 0x7f0900e9
+			public const int menu_rules = 2131296489;
+			
+			// aapt resource value: 0x7f0900ea
+			public const int menu_scores = 2131296490;
+			
+			// aapt resource value: 0x7f0900e1
+			public const int message = 2131296481;
 			
 			// aapt resource value: 0x7f090031
 			public const int middle = 2131296305;
@@ -3547,14 +3559,14 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09001e
 			public const int normal = 2131296286;
 			
+			// aapt resource value: 0x7f0900db
+			public const int notification_background = 2131296475;
+			
 			// aapt resource value: 0x7f0900d5
-			public const int notification_background = 2131296469;
+			public const int notification_main_column = 2131296469;
 			
-			// aapt resource value: 0x7f0900cf
-			public const int notification_main_column = 2131296463;
-			
-			// aapt resource value: 0x7f0900ce
-			public const int notification_main_column_container = 2131296462;
+			// aapt resource value: 0x7f0900d4
+			public const int notification_main_column_container = 2131296468;
 			
 			// aapt resource value: 0x7f09004c
 			public const int parallax = 2131296332;
@@ -3580,11 +3592,11 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09004a
 			public const int right = 2131296330;
 			
-			// aapt resource value: 0x7f0900d4
-			public const int right_icon = 2131296468;
+			// aapt resource value: 0x7f0900da
+			public const int right_icon = 2131296474;
 			
-			// aapt resource value: 0x7f0900d0
-			public const int right_side = 2131296464;
+			// aapt resource value: 0x7f0900d6
+			public const int right_side = 2131296470;
 			
 			// aapt resource value: 0x7f09000c
 			public const int save_image_matrix = 2131296268;
@@ -3658,8 +3670,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090025
 			public const int showTitle = 2131296293;
 			
-			// aapt resource value: 0x7f0900da
-			public const int sliding_tabs = 2131296474;
+			// aapt resource value: 0x7f0900e0
+			public const int sliding_tabs = 2131296480;
 			
 			// aapt resource value: 0x7f09008b
 			public const int smallLabel = 2131296395;
@@ -3691,8 +3703,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09004b
 			public const int start = 2131296331;
 			
-			// aapt resource value: 0x7f0900cb
-			public const int status_bar_latest_event_content = 2131296459;
+			// aapt resource value: 0x7f0900d1
+			public const int status_bar_latest_event_content = 2131296465;
 			
 			// aapt resource value: 0x7f090076
 			public const int submenuarrow = 2131296374;
@@ -3712,8 +3724,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09001b
 			public const int text2 = 2131296283;
 			
-			// aapt resource value: 0x7f0900c4
-			public const int textAllOuts = 2131296452;
+			// aapt resource value: 0x7f0900ca
+			public const int textAllOuts = 2131296458;
 			
 			// aapt resource value: 0x7f09006a
 			public const int textSpacerNoButtons = 2131296362;
@@ -3736,8 +3748,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090015
 			public const int textinput_error = 2131296277;
 			
-			// aapt resource value: 0x7f0900d1
-			public const int time = 2131296465;
+			// aapt resource value: 0x7f0900d7
+			public const int time = 2131296471;
 			
 			// aapt resource value: 0x7f09001c
 			public const int title = 2131296284;
@@ -3775,8 +3787,14 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090013
 			public const int transition_transform = 2131296275;
 			
+			// aapt resource value: 0x7f0900c8
+			public const int txtNewScore = 2131296456;
+			
 			// aapt resource value: 0x7f0900a1
 			public const int txtOutLabel = 2131296417;
+			
+			// aapt resource value: 0x7f0900c9
+			public const int txtOutTurn = 2131296457;
 			
 			// aapt resource value: 0x7f09002d
 			public const int uniform = 2131296301;
@@ -3790,8 +3808,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f0900dc
-			public const int visible = 2131296476;
+			// aapt resource value: 0x7f0900e2
+			public const int visible = 2131296482;
 			
 			// aapt resource value: 0x7f0900b5
 			public const int volume_item_container = 2131296437;

@@ -1,6 +1,6 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
-
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 
@@ -11,12 +11,18 @@ namespace DartAssistant.Droid.Source.Activities
 	{
 		BottomNavigationView bottomNavigation;
 
+		string UIClassSerial = "";
+		string turnClassSerial = "";
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
 			SetContentView(Resource.Layout.NavMain);
+
+			turnClassSerial = Intent.GetStringExtra("turnClassSerial");;
+			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
 
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			if (toolbar != null)
@@ -45,6 +51,24 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 
 		}
+		protected override void OnResume()
+		{
+			
+			try
+			{
+
+				bottomNavigation.Menu.GetItem(4).SetChecked(true);
+
+			}
+			catch (System.Exception ex)
+			{
+
+				System.Diagnostics.Debug.Print("Heya:" + ex.Message);
+			}
+
+			base.OnResume();
+		}
+
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
 		{
 			LoadFragment(e.Item.ItemId);
@@ -58,16 +82,34 @@ namespace DartAssistant.Droid.Source.Activities
 			{
 
 				case Resource.Id.menu_home:
-					StartActivity(typeof(AndroidNavActivity));
+					Intent iActivity = new Intent(this, typeof(AndroidNavActivity));
+
+					iActivity.PutExtra("turnClassSerial", turnClassSerial);
+					iActivity.PutExtra("UIClassSerial", UIClassSerial);
+
+					StartActivity(iActivity);
 					break;
 				case Resource.Id.menu_chart:
-					StartActivity(typeof(OutChartNavActivity));
+					Intent ichartActivity = new Intent(this, typeof(OutChartNavActivity));
+
+					ichartActivity.PutExtra("turnClassSerial", turnClassSerial);
+					ichartActivity.PutExtra("UIClassSerial", UIClassSerial);
+					StartActivity(ichartActivity);
+
 					break;
 				case Resource.Id.menu_rules:
-					StartActivity(typeof(Activity3));
+					Intent irulesActivity = new Intent(this, typeof(Activity3));
+
+					irulesActivity.PutExtra("turnClassSerial", turnClassSerial);
+					irulesActivity.PutExtra("UIClassSerial", UIClassSerial);
+					StartActivity(irulesActivity);
 					break;
 				case Resource.Id.menu_scores:
-					StartActivity(typeof(Activity4));
+					Intent iscoresActivity = new Intent(this, typeof(Activity4));
+
+					iscoresActivity.PutExtra("turnClassSerial", turnClassSerial);
+					iscoresActivity.PutExtra("UIClassSerial", UIClassSerial);
+					StartActivity(iscoresActivity);
 					break;
 				case Resource.Id.menu_info:
 					

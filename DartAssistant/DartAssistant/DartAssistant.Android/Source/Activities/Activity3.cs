@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
@@ -15,12 +16,18 @@ namespace DartAssistant.Droid.Source.Activities
 		BottomNavigationView bottomNavigation;
 		internal static Android.Content.Res.AssetManager assets { get; private set; }
 
+		string UIClassSerial = "";
+		string turnClassSerial = "";
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
 			SetContentView(Resource.Layout.NavRules);
+
+			turnClassSerial = Intent.GetStringExtra("turnClassSerial"); ;
+			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
 
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			if (toolbar != null)
@@ -52,6 +59,24 @@ namespace DartAssistant.Droid.Source.Activities
 			assets = this.Assets;
 		}
 
+		protected override void OnResume()
+		{
+
+			try
+			{
+
+				bottomNavigation.Menu.GetItem(0).SetChecked(true);
+
+			}
+			catch (System.Exception ex)
+			{
+
+				System.Diagnostics.Debug.Print("Heya:" + ex.Message);
+			}
+
+			base.OnResume();
+		}
+
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
 		{
 			LoadFragment(e.Item.ItemId);
@@ -65,7 +90,12 @@ namespace DartAssistant.Droid.Source.Activities
 			{
 				
 				case Resource.Id.menu_back:
-					StartActivity(typeof(AndroidNavActivity));
+					Intent iActivity = new Intent(this, typeof(AndroidNavActivity));
+
+					iActivity.PutExtra("turnClassSerial", turnClassSerial);
+					iActivity.PutExtra("UIClassSerial", UIClassSerial);
+
+					StartActivity(iActivity);
 					break;
 				case Resource.Id.menu_OutGames:
 					fragment = fragRules1.NewInstance();

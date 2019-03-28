@@ -82,18 +82,99 @@
 			android:padding="10sp"
 			/>
         </LinearLayout>
-	<TextView
-		android:text=""
-		android:textAppearance="?android:attr/textAppearanceMedium"
-		android:textAlignment="center"
-		android:textColor="#FFFF00"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:padding="10sp"
-		android:id="@+id/txtOutLabel"/>
 
-	</LinearLayout>
-			</FrameLayout>
+		<TextView
+			android:text="Out Label"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:textAlignment="center"
+			android:textColor="@color/primaryDark"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="10sp"
+			android:id="@+id/txtOutLabel"/>
+				<LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+		android:padding="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:gravity="center_vertical">
+				<EditText
+						android:id="@+id/StartScore"
+						android:text=""
+						android:textAppearance="?android:attr/textAppearanceMedium"
+						android:layout_width="wrap_content"
+						android:layout_height="40sp"
+						android:padding="10sp"
+						android:inputType="phone"
+						android:imeOptions="actionDone"
+						android:hint="Enter Starting Score"
+			/>
+					<Button
+						android:id="@+id/btn_StartTurn"
+						android:text="Start Turn"
+						android:layout_width="wrap_content"
+						android:layout_height="40sp"
+						android:padding="10sp"
+			/>
+					</LinearLayout>
+				<LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+		android:padding="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:gravity="center_vertical">
+					<EditText
+						android:id="@+id/DartScore"
+						android:text=""
+						android:textAppearance="?android:attr/textAppearanceMedium"
+						android:layout_width="wrap_content"
+						android:layout_height="40sp"
+						android:padding="10sp"
+						android:inputType="phone"
+						android:imeOptions="actionDone"
+						android:hint="Enter Dart Score"
+			/>
+					<Button
+						android:id="@+id/btn_DartScored"
+						android:text="Dart Scored"
+						android:layout_width="wrap_content"
+						android:layout_height="40sp"
+						android:padding="10sp"
+			/>
+					</LinearLayout>
+
+				<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+					
+					
+					<TextView
+						android:text="Current Score"
+						android:textAppearance="?android:attr/textAppearanceMedium"
+						android:textColor="@color/primaryDark"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:padding="10sp"
+						android:id="@+id/txtNewScore"/>
+					<TextView
+						android:text="Suggested Out"
+						android:textAppearance="?android:attr/textAppearanceMedium"
+						android:textColor="@color/primaryDark"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:padding="10sp"
+						android:id="@+id/txtOutTurn"/>
+				</LinearLayout>
+		</LinearLayout>
+		
+	</FrameLayout>
     <android.support.design.widget.BottomNavigationView
       android:id="@+id/bottom_navigation"
       android:layout_width="match_parent"

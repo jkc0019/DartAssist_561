@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
+using Android.Util;
 
 namespace DartAssistant.Droid.Source.Activities
 {
@@ -19,12 +16,22 @@ namespace DartAssistant.Droid.Source.Activities
 	{
 		BottomNavigationView bottomNavigation;
 
+		string UIClassSerial = "";
+		string turnClassSerial = "";
+		
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
 			SetContentView(Resource.Layout.NavOutChart);
-			
+
+			Log.Debug(GetType().FullName, "Activity B - OnCreate");
+			turnClassSerial = Intent.GetStringExtra("turnClassSerial");
+			System.Diagnostics.Debug.Print("-" + turnClassSerial);
+
+			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
+			System.Diagnostics.Debug.Print("-" + UIClassSerial);
+
 			//Button button = FindViewById<Button>(Resource.Id.btn_Back);
 			//button.Click += delegate {
 			//	StartActivity(typeof(AndroidActivity));
@@ -60,6 +67,54 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 		}
 
+		protected override void OnRestart()
+		{
+			Log.Debug(GetType().FullName, "Activity B - OnRestart");
+			base.OnRestart();
+		}
+
+		protected override void OnStart()
+		{
+			Log.Debug(GetType().FullName, "Activity B - OnStart");
+			base.OnStart();
+		}
+
+		protected override void OnResume()
+		{
+			Log.Debug(GetType().FullName, "Activity B - OnResume");
+
+			try
+			{
+
+				bottomNavigation.Menu.GetItem(1).SetChecked(true);
+
+			}
+			catch (System.Exception ex)
+			{
+
+				System.Diagnostics.Debug.Print("Heya:" + ex.Message);
+			}
+
+			base.OnResume();
+		}
+
+		protected override void OnPause()
+		{
+			Log.Debug(GetType().FullName, "Activity B - OnPause");
+			base.OnPause();
+		}
+
+		protected override void OnStop()
+		{
+			Log.Debug(GetType().FullName, "Activity B - OnStop");
+			base.OnStop();
+		}
+
+		protected override void OnDestroy()
+		{
+			Log.Debug(GetType().FullName, "Activity B - OnDestroy");
+			base.OnDestroy();
+		}
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
 		{
 			LoadFragment(e.Item.ItemId);
@@ -67,22 +122,41 @@ namespace DartAssistant.Droid.Source.Activities
 
 		void LoadFragment(int id)
 		{
+			
 			Android.Support.V4.App.Fragment fragment = null;
 			switch (id)
 			{
 				case Resource.Id.menu_home:
-					StartActivity(typeof(AndroidNavActivity));
+					Intent iActivity = new Intent(this, typeof(AndroidNavActivity));
+					
+					iActivity.PutExtra("turnClassSerial", turnClassSerial);
+					iActivity.PutExtra("UIClassSerial", UIClassSerial);
+
+					StartActivity(iActivity);
 					break;
 				case Resource.Id.menu_chart:
 					break;
 				case Resource.Id.menu_rules:
-					StartActivity(typeof(Activity3));
+					Intent irulesActivity = new Intent(this, typeof(Activity3));
+
+					irulesActivity.PutExtra("turnClassSerial", turnClassSerial);
+					irulesActivity.PutExtra("UIClassSerial", UIClassSerial);
+					StartActivity(irulesActivity);
 					break;
 				case Resource.Id.menu_scores:
-					StartActivity(typeof(Activity4));
+					Intent iscoresActivity = new Intent(this, typeof(Activity4));
+
+					iscoresActivity.PutExtra("turnClassSerial", turnClassSerial);
+					iscoresActivity.PutExtra("UIClassSerial", UIClassSerial);
+					StartActivity(iscoresActivity);
 					break;
+
 				case Resource.Id.menu_info:
-					StartActivity(typeof(Activity5));
+					Intent iinfoActivity = new Intent(this, typeof(Activity5));
+
+					iinfoActivity.PutExtra("turnClassSerial", turnClassSerial);
+					iinfoActivity.PutExtra("UIClassSerial", UIClassSerial);
+					StartActivity(iinfoActivity);
 					break;
 			}
 			if (fragment == null)
