@@ -88,6 +88,22 @@ namespace DartAssistant.Test
             Assert.AreEqual(TurnState.NotStarted, subject.State, "State was not the expected value");
         }
 
+        /// <summary>
+        /// WHEN a Turn is instantianted
+        /// THEN the value of LastPointsScored will be null
+        /// </summary>
+        [TestMethod]
+        public void Constructor_Always_SetsLastPointsScoredToExpectedValue()
+        {
+            // Arrange
+
+            // Act
+            Turn subject = new Turn(InOutRule.Double);
+
+            // Assert
+            Assert.IsNull(subject.LastPointsScored, "LastPointsScored was not null as expected");
+        }
+
         #endregion
 
         #region SetStartingScore(int)
@@ -200,6 +216,30 @@ namespace DartAssistant.Test
             Assert.AreEqual(TurnState.InProgress, subject.State, "State was not the expected value");
             Assert.AreEqual(10, subject.CurrentScore, "CurrentScore was not the expected value");
             Assert.AreEqual(3, subject.DartsRemaining, "DartsRemaining was not the expected value");
+            Assert.IsNull(subject.LastPointsScored, "LastPointsScored was not null as expected");
+        }
+
+        /// <summary>
+        /// WHEN SetStartingScore(int) is called after three darts of points have been recorded
+        /// THEN the dart properties will be set to their expected values.
+        /// </summary>
+        [TestMethod]
+        public void SetStartingScore_PointsForAllDartsRecorded_SetsDartPropertiesAsExpected()
+        {
+            // Arrange
+            Turn subject = new Turn(InOutRule.Double);
+            subject.SetStartingScore(20);
+            subject.RecordPointsScored(1);
+            subject.RecordPointsScored(1);
+            subject.RecordPointsScored(1);
+
+            // Act
+            subject.SetStartingScore(10);
+
+            // Assert
+            Assert.IsNull(subject.FirstDartPoints, "FirstDartPoints was not null as expected");
+            Assert.IsNull(subject.SecondDartPoints, "SecondDartPoints was not null as expected");
+            Assert.IsNull(subject.ThirdDartPoints, "ThirdDartPoints was not null as expected");
         }
 
         #endregion
@@ -302,6 +342,50 @@ namespace DartAssistant.Test
             // Assert
             Assert.IsTrue(status, "Unexpected value returned");
             Assert.AreEqual(6, subject.CurrentScore, "CurrentScore was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN RecordPointsScored(int) is called with a valid value
+        /// THEN the value of LastPointsScored will be updated as expected.
+        /// </summary>
+        [TestMethod]
+        public void RecordPointsScored_ValidValue_SetsLastPointsScoredAsExpected()
+        {
+            // Arrange
+            Turn subject = new Turn(InOutRule.Double);
+            subject.SetStartingScore(10);
+
+            // Act
+            bool status = subject.RecordPointsScored(4);
+
+            // Assert
+            Assert.IsNotNull(subject.LastPointsScored, "LastPointsScored was null when not expected");
+            Assert.AreEqual(4, subject.LastPointsScored.Value, "LastPointsScored was not the expected value");
+        }
+
+        /// <summary>
+        /// WHEN RecordPointsScored(int) is called with a valid value
+        /// THEN the value of each dart's points will be updated as expected.
+        /// </summary>
+        [TestMethod]
+        public void RecordPointsScored_ValidValue_SetsDartPointsAsExpected()
+        {
+            // Arrange
+            Turn subject = new Turn(InOutRule.Double);
+            subject.SetStartingScore(10);
+
+            // Act
+            subject.RecordPointsScored(1);
+            subject.RecordPointsScored(2);
+            subject.RecordPointsScored(3);
+
+            // Assert
+            Assert.IsNotNull(subject.FirstDartPoints, "FirstDartPoints was null when not expected");
+            Assert.AreEqual(1, subject.FirstDartPoints.Value, "FirstDartPoints was not the expected value");
+            Assert.IsNotNull(subject.SecondDartPoints, "SecondDartPoints was null when not expected");
+            Assert.AreEqual(2, subject.SecondDartPoints.Value, "SecondDartPoints was not the expected value");
+            Assert.IsNotNull(subject.ThirdDartPoints, "ThirdDartPoints was null when not expected");
+            Assert.AreEqual(3, subject.ThirdDartPoints.Value, "ThirdDartPoints was not the expected value");
         }
 
         /// <summary>
