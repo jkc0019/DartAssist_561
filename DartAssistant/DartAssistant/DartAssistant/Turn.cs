@@ -12,29 +12,49 @@
         public const string SCORED_KEY_WORD = "scored";
 
         /// <summary>
-        /// Gets the current score after any number of darts has been recorded.
+        /// Gets and sets the current score after any number of darts has been recorded.
         /// </summary>
         public int CurrentScore { get; set; }
 
         /// <summary>
-        /// Gets the number of darts remaining to be thrown/recorded for the turn.
+        /// Gets and sets the number of darts remaining to be thrown/recorded for the turn.
         /// </summary>
         public int DartsRemaining { get; set; }
 
         /// <summary>
-        /// Gets the Out Rule that is being utilized for the turn.
+        /// Gets and sets the points scored for the first dart of the turn.
+        /// </summary>
+        public int? FirstDartPoints { get; set; }
+
+        /// <summary>
+        /// Gets and sets the LastPointsScored for the turn.
+        /// </summary>
+        public int? LastPointsScored { get; set; }
+
+        /// <summary>
+        /// Gets and sets the Out Rule that is being utilized for the turn.
         /// </summary>
         public InOutRule Rule { get; set; }
 
         /// <summary>
-        /// Gets the value of the score at the start of the turn.
+        /// Gets and sets the points scored for the second dart of the turn.
+        /// </summary>
+        public int? SecondDartPoints { get; set; }
+
+        /// <summary>
+        /// Gets and sets the value of the score at the start of the turn.
         /// </summary>
         public int StartingScore { get; set; }
 
         /// <summary>
-        /// Gets the value that indicates the current state of the turn.
+        /// Gets and sets the value that indicates the current state of the turn.
         /// </summary>
         public TurnState State { get; set; }
+
+        /// <summary>
+        /// Gets and sets the points scored for the third dart of the turn.
+        /// </summary>
+        public int? ThirdDartPoints { get; set; }
 
         #endregion
 
@@ -91,6 +111,32 @@
             // Update the current score.
             CurrentScore -= points;
 
+            // Update last points scored
+            LastPointsScored = points;
+
+            // Update Dart's Points
+            switch(DartsRemaining)
+            {
+                case 3:
+                    {
+                        // Is the first dart
+                        FirstDartPoints = points;
+                        break;
+                    }
+                case 2:
+                    {
+                        // Is the second dart
+                        SecondDartPoints = points;
+                        break;
+                    }
+                case 1:
+                    {
+                        // Is the third dart
+                        ThirdDartPoints = points;
+                        break;
+                    }
+            }
+
             // Check for possible win.
             if(0 == CurrentScore)
             {
@@ -131,6 +177,10 @@
             CurrentScore = score;
             DartsRemaining = 3;
             State = TurnState.InProgress;
+            LastPointsScored = null;
+            FirstDartPoints = null;
+            SecondDartPoints = null;
+            ThirdDartPoints = null;
             return true;
         }
 
