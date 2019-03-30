@@ -209,7 +209,6 @@ namespace DartAssistant.Droid.Source.Activities
 		protected override void OnSaveInstanceState(Bundle outsInstanceState)
 		{
 
-			
 			string savedTurn = JsonConvert.SerializeObject(clsTurn);
 			outsInstanceState.PutString("jsonSerialTurn", savedTurn);
 
@@ -331,6 +330,8 @@ namespace DartAssistant.Droid.Source.Activities
 		{
 			singleUse = false;
 
+			HideKeyboard();
+
 			Recognizer.StartListening(SpeechIntent);
 
 			mStreamVolume = mAudioManager.GetStreamVolume(Stream.Music); // getting system volume into var for later un-muting 
@@ -353,6 +354,8 @@ namespace DartAssistant.Droid.Source.Activities
 		{
 			singleUse = false;
 			string strRecommendedOut = "";
+
+			HideKeyboard();
 
 			var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
 			txtDartScore.Text = "";
@@ -414,6 +417,8 @@ namespace DartAssistant.Droid.Source.Activities
 			singleUse = false;
 			string strNewOut = "";
 
+			HideKeyboard();
+
 			var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
 
 			if (txtDartScore.Text.Trim() != "")
@@ -455,6 +460,8 @@ namespace DartAssistant.Droid.Source.Activities
 			int score = 0;
 			string text = "";
 
+			HideKeyboard();
+
 			bool Result = false;
 			Result = int.TryParse(scoreStr, out score);
 
@@ -479,14 +486,14 @@ namespace DartAssistant.Droid.Source.Activities
 			{
 				text = "Unknown Out";
 			}
-			else
-			{
-				txtOutLabel.Text = text;
-			}
+			
+			txtOutLabel.Text = text;
 
 		}
 		private void BtnClearOut_Click(object sender, System.EventArgs e)
 		{
+			HideKeyboard();
+
 			var txtOutLabel = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutLabel);
 			var txtYourScore = FindViewById<Android.Widget.EditText>(Resource.Id.YourScore);
 
@@ -818,7 +825,7 @@ namespace DartAssistant.Droid.Source.Activities
 					stringBuilder.Append(", ");
 				}
 			}
-
+		
 			string text = stringBuilder.ToString();
 
 			return text;
@@ -847,5 +854,21 @@ namespace DartAssistant.Droid.Source.Activities
 			Device.StartTimer(TimeSpan.FromSeconds(1), UpdateDateTime);
 			
 		}
-	}
+
+		private void HideKeyboard()
+		{
+			try
+			{
+				Android.Views.InputMethods.InputMethodManager inputMethodManager = Application.GetSystemService(Context.InputMethodService) as Android.Views.InputMethods.InputMethodManager;
+				inputMethodManager.HideSoftInputFromWindow(this.CurrentFocus.WindowToken, Android.Views.InputMethods.HideSoftInputFlags.None);
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.Print("Error- " + ex.Message);
+
+			}
+		}
+
+		}
 }
