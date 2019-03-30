@@ -170,7 +170,7 @@ namespace DartAssistant.Droid.Source.Activities
 		private void InitializeOutChart()
 		{
 			OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
-			List<String> allOutsList = new List<String>();
+			List<string> allOutsList = new List<string>();
 			Dictionary<int, List<Dart>> allOuts = outCalculator.GetAllOuts();
 			// iterate through the dictionary to get all the outs
 			foreach (KeyValuePair<int, List<Dart>> entry in allOuts)
@@ -193,7 +193,7 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 
 			Android.Widget.ListView lstMyList = (Android.Widget.ListView)FindViewById<Android.Widget.ListView>(Resource.Id.MyList);
-			lstMyList.Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, allOutsList);
+			lstMyList.Adapter = new OutChartAdapter(this, allOutsList);
 
 		}
 	}
