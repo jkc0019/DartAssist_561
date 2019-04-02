@@ -10,11 +10,11 @@ DartAssistant was developed using Microsoft Visual Studio.  The application can 
 * Install the Visual Studio using the install Wizard.  Make sure at least the following packages are selected during the install process.
 
 * Once installation is complete, you need to connect Visual Studio to the DartAssistant Github repository.  This is accomplished by going to the `Version Control` menu and select `Checkout`.  In the `Checkout` Dialog box and enter the following:
-** Type: `Git`
-** Name: `artAssistant Repo`
-** Url: `ttps://github.com/jkc0019/DartAssist_561.git`
-** Select `OK`
-** Select `Checkout`
+  * Type: `Git`
+  * Name: `artAssistant Repo`
+  * Url: `ttps://github.com/jkc0019/DartAssist_561.git`
+  * Select `OK`
+  * Select `Checkout`
 
 * The source code will now be loaded into Visual Studio.  The application now needs to be compiled before utilizing Visual Studio to test the application.  Click on the `DartAssistant.Android` on the left menu of Visual Studio and then Select `Build` from the menu, and then `Build All`.  
 
