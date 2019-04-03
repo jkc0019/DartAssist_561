@@ -40,7 +40,7 @@ namespace DartAssistant.Droid.Source
 			//<><><><><><><><><><><><><><><><><><><><><><><><><>
 			//Use this to return content of a text file as a List from
 			//Files included as Assets in the OS-specific native Project. Pass Filename only with extension (i.e. DartRules.txt)
-			Activities.Activity3 activity = new Activities.Activity3();
+			Activities.RulesActivity activity = new Activities.RulesActivity();
 			List<string> infoRequested = activity.GetStoredInfo(infoFile: "DartRules.txt");
 
 			StringBuilder sb = new StringBuilder();
