@@ -8,8 +8,10 @@
         #region Member and Properties
 
         // Constants
+        public const string HIT_KEY_WORD = "hit";
         public const string START_KEY_WORD = "start";
         public const string SCORED_KEY_WORD = "scored";
+        public const string SCORE_KEY_WORD = "score";
 
         /// <summary>
         /// Gets and sets the current score after any number of darts has been recorded.
@@ -87,7 +89,9 @@
             string[] parts = value.Split(' ');
 
             // Make sure there are at least two parts, the second part matches the keyword, and the first part can be parsed to an int.
-            if (2 <= parts.Length && SCORED_KEY_WORD == parts[1] && int.TryParse(parts[0], out int outScore))
+            if (2 <= parts.Length &&
+                (SCORED_KEY_WORD == parts[1] || SCORE_KEY_WORD == parts[1] || HIT_KEY_WORD == parts[1]) &&
+                int.TryParse(parts[0], out int outScore))
             {
                 // Record the score.
                 return RecordPointsScored(outScore);
