@@ -7,7 +7,7 @@ DartAssistant was developed using Microsoft Visual Studio.  The application can 
 ## Instructions
 * Download Microsoft Visual Studio for your platform of choice (either Windows or OSX).  Visit https://visualstudio.microsoft.com/vs/community/ to download.
 
-* Install the Visual Studio using the install Wizard.  Make sure at least the following packages are selected during the install process.
+* Install the Visual Studio using the install Wizard.  Make sure during the install process to have at least `Mobile Development with .NET` is a selected `Workloads`.
 
 * Once installation is complete, you need to connect Visual Studio to the DartAssistant Github repository.  This is accomplished by going to the `Version Control` menu and select `Checkout`.  In the `Checkout` Dialog box and enter the following:
   * Type: `Git`
