@@ -12,7 +12,7 @@ DartAssistant was developed using Microsoft Visual Studio.  The application can 
 * Once installation is complete, you need to connect Visual Studio to the DartAssistant Github repository.  This is accomplished by going to the `Version Control` menu and select `Checkout`.  In the `Checkout` Dialog box and enter the following:
   * Type: `Git`
   * Name: `DartAssistant Repo`
-  * Url: `ttps://github.com/jkc0019/DartAssist_561.git`
+  * Url: `https://github.com/jkc0019/DartAssist_561.git`
   * Select `OK`
   * Select `Checkout`
 
