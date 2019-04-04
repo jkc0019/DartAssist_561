@@ -194,18 +194,14 @@ namespace DartAssistant.Droid.Source.Activities
             {
                 System.Diagnostics.Debug.Print(strOut);
 
-                if (0 == strOut.Trim().Length)
+                if (strOut.Trim().Length > 0)
                 {
-                    sb.Append("<br/>");
-                }
-                else
-                {
-                    sb.Append(strOut);
-                }
+                    sb.Append("<p>" + strOut + "</p>");
+                }                
 
             }
 
-            webView.LoadDataWithBaseURL(null, @"<html><body><h1>301 / 501</h1><p>" + sb.ToString() + "</p></body></html>", "text/html", "utf-8", null);
+            webView.LoadDataWithBaseURL(null, @"<html><head><style>body{padding:0 15px 50px;}p{font-size:16px;line-height:1.5;}</style></head><body><h1>301 / 501</h1>" + sb.ToString() + "</body></html>", "text/html", "utf-8", null);
         }
 	}
 }
