@@ -75,9 +75,7 @@
     <Compile Include="Source\Activities\Activity4.cs" />
     <Compile Include="Source\Activities\Activity5.cs" />
     <Compile Include="Source\Activities\AndroidActivity.cs" />
-    <Compile Include="Source\Activities\AndroidNavActivity.cs" />
     <Compile Include="Source\Activities\OutChartActivity.cs" />
-    <Compile Include="Source\Activities\OutChartNavActivity.cs" />
     <Compile Include="Source\Listeners\RecognitionListener.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\DartRules.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\CricketRules.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\Fragments\" />
