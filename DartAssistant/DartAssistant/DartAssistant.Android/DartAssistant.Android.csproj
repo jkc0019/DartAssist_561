@@ -78,9 +78,6 @@
     <Compile Include="Source\Activities\AndroidNavActivity.cs" />
     <Compile Include="Source\Activities\OutChartActivity.cs" />
     <Compile Include="Source\Activities\OutChartNavActivity.cs" />
-    <Compile Include="Source\Fragments\fragRules1.cs" />
-    <Compile Include="Source\Fragments\fragRules2.cs" />
-    <Compile Include="Source\Fragments\fragRules3.cs" />
     <Compile Include="Source\Listeners\RecognitionListener.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +303,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\CricketRules.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\Fragments\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
