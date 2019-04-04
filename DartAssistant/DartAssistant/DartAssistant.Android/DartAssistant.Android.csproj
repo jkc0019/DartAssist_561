@@ -111,14 +111,6 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\OutChart.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\menu\bottom_navigation_main.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -185,12 +177,12 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\NavOutChart.axml">
+    <AndroidResource Include="Resources\layout\OutChart.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\NavGame.axml">
+    <AndroidResource Include="Resources\layout\Game.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -282,19 +274,10 @@
     <AndroidResource Include="Resources\menu\bottom_nav_rules.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\NavMain.axml" />
+    <AndroidResource Include="Resources\layout\Main.axml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\NavRules.axml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\fragRules1.axml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\fragRules2.axml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\fragRules3.axml" />
+    <AndroidResource Include="Resources\layout\Rules.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\DartRules.txt" />

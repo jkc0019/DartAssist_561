@@ -19,7 +19,7 @@ namespace DartAssistant.Droid.Source.Activities
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
-			SetContentView(Resource.Layout.NavMain);
+			SetContentView(Resource.Layout.Main);
 
 			turnClassSerial = Intent.GetStringExtra("turnClassSerial");;
 			UIClassSerial = Intent.GetStringExtra("UIClassSerial");

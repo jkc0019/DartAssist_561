@@ -56,7 +56,7 @@ namespace DartAssistant.Droid.Source.Activities
 		{
 			base.OnCreate(savedInstanceState);
 
-			SetContentView(Resource.Layout.NavGame);
+			SetContentView(Resource.Layout.Game);
 
 			Log.Debug(GetType().FullName, "Activity A - OnCreate");
 

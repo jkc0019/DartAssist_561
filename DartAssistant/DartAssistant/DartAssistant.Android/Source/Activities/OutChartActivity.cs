@@ -23,7 +23,7 @@ namespace DartAssistant.Droid.Source.Activities
 		{
 			base.OnCreate(savedInstanceState);
 
-			SetContentView(Resource.Layout.NavOutChart);
+			SetContentView(Resource.Layout.OutChart);
 
 			Log.Debug(GetType().FullName, "Activity B - OnCreate");
 			turnClassSerial = Intent.GetStringExtra("turnClassSerial");

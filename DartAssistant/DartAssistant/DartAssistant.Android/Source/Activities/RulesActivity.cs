@@ -26,7 +26,7 @@ namespace DartAssistant.Droid.Source.Activities
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
-			SetContentView(Resource.Layout.NavRules);
+			SetContentView(Resource.Layout.Rules);
 
             turnClassSerial = Intent.GetStringExtra("turnClassSerial");
             System.Diagnostics.Debug.Print("-" + turnClassSerial);
