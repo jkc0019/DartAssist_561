@@ -9,10 +9,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Collections.Generic;
-using System.Collections;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 using Android.Support.Design.Widget;
@@ -36,20 +33,19 @@ namespace DartAssistant.Droid.Source.Activities
 
 		//Variables for Maintaining State
 		int startingScore = 0;
-		//int LastScore = 0;
 		int currentScore = 0;
-		//string currentScoreText = "";
-		//string doubleOutText = "";
-		//int dartsRemaining = 0;
-		//int turnState = 0;
 		string turnClassSerial = "";
 		string UIClassSerial = "";
 
+		//Collection for debugging messages
 		System.Collections.Generic.List<string> mList = new System.Collections.Generic.List<string>();
 
+		//Nav menu
 		BottomNavigationView bottomNavigation;
 
+		//Turn Class instantiation
 		Turn clsTurn = new Turn(InOutRule.Double);
+		//Class to store some UI info
 		UIState clsUIState = new UIState();
 
 		protected override void OnCreate(Bundle savedInstanceState)
@@ -58,12 +54,11 @@ namespace DartAssistant.Droid.Source.Activities
 
 			SetContentView(Resource.Layout.NavGame);
 
+			//Logging
 			Log.Debug(GetType().FullName, "Activity A - OnCreate");
 
 			turnClassSerial = Intent.GetStringExtra("turnClassSerial");
-			System.Diagnostics.Debug.Print("-" + turnClassSerial);
 			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
-			System.Diagnostics.Debug.Print("-" + UIClassSerial);
 
 			var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
 			var txtStartScore = FindViewById<Android.Widget.EditText>(Resource.Id.StartScore);
@@ -598,11 +593,19 @@ namespace DartAssistant.Droid.Source.Activities
 				TextToSpeech.SpeakAsync(strRecommendedOut);
 
 			}
-			else if (fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1)
+			else if ((fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1) || 
+					(fmtInput.Contains("hit") && recognized.ToLower().IndexOf("hit") > 1))
 			{
 				//TODO 
 				//implement this after establishing total score tracking
-				fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("score") - 1));
+				if (recognized.ToLower().IndexOf("score") > 1)
+				{
+					fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("score") - 1));
+				}
+				else
+				{
+					fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("hit") - 1));
+				}
 
 				bool Result = false;
 				Result = int.TryParse(fmtInput, out SingleScore);
