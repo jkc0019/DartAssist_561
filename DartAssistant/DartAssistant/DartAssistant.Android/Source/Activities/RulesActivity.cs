@@ -116,7 +116,7 @@ namespace DartAssistant.Droid.Source.Activities
                 case Resource.Id.menu_rules:                    
                     break;
                 case Resource.Id.menu_scores:
-                    Intent iscoresActivity = new Intent(this, typeof(Activity4));
+                    Intent iscoresActivity = new Intent(this, typeof(TopScoresActivity));
 
                     iscoresActivity.PutExtra("turnClassSerial", turnClassSerial);
                     iscoresActivity.PutExtra("UIClassSerial", UIClassSerial);

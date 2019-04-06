@@ -9,10 +9,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Collections.Generic;
-using System.Collections;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 using Android.Support.Design.Widget;
@@ -24,6 +21,7 @@ namespace DartAssistant.Droid.Source.Activities
 	[Activity(Label = "@string/app_name", MainLauncher = true)]
 	public class AndroidActivity : AppCompatActivity
 	{
+	
 		SpeechRecognizer Recognizer { get; set; }
 		Intent SpeechIntent { get; set; }
 
@@ -36,34 +34,32 @@ namespace DartAssistant.Droid.Source.Activities
 
 		//Variables for Maintaining State
 		int startingScore = 0;
-		//int LastScore = 0;
 		int currentScore = 0;
-		//string currentScoreText = "";
-		//string doubleOutText = "";
-		//int dartsRemaining = 0;
-		//int turnState = 0;
 		string turnClassSerial = "";
 		string UIClassSerial = "";
 
+		//Collection for debugging messages
 		System.Collections.Generic.List<string> mList = new System.Collections.Generic.List<string>();
 
+		//Nav menu
 		BottomNavigationView bottomNavigation;
 
+		//Turn Class instantiation
 		Turn clsTurn = new Turn(InOutRule.Double);
+		//Class to store some UI info
 		UIState clsUIState = new UIState();
-
+		
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-
+			
 			SetContentView(Resource.Layout.Game);
 
+			//Logging
 			Log.Debug(GetType().FullName, "Activity A - OnCreate");
 
 			turnClassSerial = Intent.GetStringExtra("turnClassSerial");
-			System.Diagnostics.Debug.Print("-" + turnClassSerial);
 			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
-			System.Diagnostics.Debug.Print("-" + UIClassSerial);
 
 			var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
 			var txtStartScore = FindViewById<Android.Widget.EditText>(Resource.Id.StartScore);
@@ -302,7 +298,7 @@ namespace DartAssistant.Droid.Source.Activities
 					StartActivity(irulesActivity);
 					break;
 				case Resource.Id.menu_scores:
-					Intent iscoresActivity = new Intent(this, typeof(Activity4));
+					Intent iscoresActivity = new Intent(this, typeof(TopScoresActivity));
 
 					iscoresActivity.PutExtra("turnClassSerial", turnClassSerial);
 					iscoresActivity.PutExtra("UIClassSerial", UIClassSerial);
@@ -375,6 +371,7 @@ namespace DartAssistant.Droid.Source.Activities
 				}
 				else
 				{
+					clsTurn.DartsRemaining = 3;
 					strRecommendedOut = RecommendedOut(startingScore);
 				}
 
@@ -385,12 +382,13 @@ namespace DartAssistant.Droid.Source.Activities
 
 				var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
 				txtOutTurn.Text = "(" + txtStartScore.Text + ") " + strRecommendedOut;
-
+				
 				currentScore = startingScore;
 				clsUIState.CurrentScoreText = txtNewOut.Text;
 				clsUIState.DoubleOutText = txtOutTurn.Text;
 
 				TextToSpeech.SpeakAsync(txtStartScore.Text + " Starting Score");
+				TextToSpeech.SpeakAsync(strRecommendedOut);
 			}
 			else
 			{
@@ -448,7 +446,13 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 
 			TextToSpeech.SpeakAsync(strNewOut);
+			
+			string strRecommendedOut = "";
+			strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
+			var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+			txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut;
 
+			TextToSpeech.SpeakAsync(strRecommendedOut);
 		}
 
 		private void BtnGetOut_Click(object sender, System.EventArgs e)
@@ -598,11 +602,19 @@ namespace DartAssistant.Droid.Source.Activities
 				TextToSpeech.SpeakAsync(strRecommendedOut);
 
 			}
-			else if (fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1)
+			else if ((fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1) || 
+					(fmtInput.Contains("hit") && recognized.ToLower().IndexOf("hit") > 1))
 			{
 				//TODO 
 				//implement this after establishing total score tracking
-				fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("score") - 1));
+				if (recognized.ToLower().IndexOf("score") > 1)
+				{
+					fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("score") - 1));
+				}
+				else
+				{
+					fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("hit") - 1));
+				}
 
 				bool Result = false;
 				Result = int.TryParse(fmtInput, out SingleScore);
@@ -628,6 +640,12 @@ namespace DartAssistant.Droid.Source.Activities
 
 				TextToSpeech.SpeakAsync(strRecommendedOut);
 
+				var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+				txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut;
+				
+				strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
+				TextToSpeech.SpeakAsync(strRecommendedOut);
+
 			}
 			else if (fmtInput.Contains("start") && recognized.ToLower().IndexOf("start") > 1)
 			{
@@ -645,6 +663,7 @@ namespace DartAssistant.Droid.Source.Activities
 				}
 				else
 				{
+					clsTurn.DartsRemaining = 3;
 					strRecommendedOut = RecommendedOut(startingScore);
 				}
 
@@ -670,7 +689,8 @@ namespace DartAssistant.Droid.Source.Activities
 					clsUIState.DoubleOutText = txtOutTurn.Text;
 
 					TextToSpeech.SpeakAsync(txtStartScore.Text + " Starting Score");
-					
+					TextToSpeech.SpeakAsync(strRecommendedOut);
+
 				}
 				
 			}
@@ -711,6 +731,11 @@ namespace DartAssistant.Droid.Source.Activities
 			txtOutTurn.Text = "";
 			clsUIState.DoubleOutText = txtOutTurn.Text;
 
+			string totalScore = (clsTurn.FirstDartPoints + clsTurn.SecondDartPoints + clsTurn.ThirdDartPoints).ToString();
+		
+			PreferenceStore clsPrefStore = new PreferenceStore();
+			bool scoreStored = clsPrefStore.CheckScoresTopList(totalScore);
+			
 		}
 
 		private string GetNewScore(string ThrownScore)
@@ -782,7 +807,7 @@ namespace DartAssistant.Droid.Source.Activities
 			int dartCount = 0;
 
 			OutCalculator clsOutCalc = new OutCalculator(InOutRule.Double);
-			List<Dart> recOut = clsOutCalc.GetDartsForOut(TotalOut);
+			List<Dart> recOut = clsOutCalc.GetDartsForOut(TotalOut,clsTurn.DartsRemaining);
 
 			StringBuilder sb = new StringBuilder();
 
@@ -813,7 +838,7 @@ namespace DartAssistant.Droid.Source.Activities
 
 			int score = TotalOut;
 			OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
-			List<Dart> outs = outCalculator.GetDartsForOut(score);
+			List<Dart> outs = outCalculator.GetDartsForOut(score, clsTurn.DartsRemaining);
 
 			StringBuilder stringBuilder = new StringBuilder();
 

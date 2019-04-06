@@ -10,7 +10,7 @@ using Android.Widget;
 namespace DartAssistant.Droid.Source.Activities
 {
 	[Activity(Label = "Top Scores")]
-	public class Activity4 : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+	public class TopScoresActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		BottomNavigationView bottomNavigation;
 
@@ -25,7 +25,7 @@ namespace DartAssistant.Droid.Source.Activities
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
-			SetContentView(Resource.Layout.Main);
+			SetContentView(Resource.Layout.TopScores);
 
 			turnClassSerial = Intent.GetStringExtra("turnClassSerial"); ;
 			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
@@ -97,12 +97,7 @@ namespace DartAssistant.Droid.Source.Activities
 					savedHighScores = new string[1];
 					savedHighScores[0] = scores;
 				}
-				else
-				{
-					//First.Text = "No High Scores Recorded";
-					return;
-				}
-
+				
 				string extractedScore = "";
 				string formattedDate = "";
 				//int counter = 0;
@@ -111,66 +106,36 @@ namespace DartAssistant.Droid.Source.Activities
 
 				if (savedHighScores.Length > 0)
 				{
+					allOutsList.Add(" ");
+					allOutsList.Add("Score" + "Date".ToString().PadLeft(15, ' '));
+
 					foreach (string score in savedHighScores)
 					{
 						extractedScore = score.Substring(0, score.Length - 8).PadLeft(5, ' ') + ": ";
 
-						formattedDate = score.Substring(score.Length - 4, 2) + "/" +
+						formattedDate = "   " + score.Substring(score.Length - 4, 2) + "/" +
 									score.ToString().Substring(score.Length - 2, 2) + "/" +
 									score.ToString().Substring(score.Length - 8, 4);
 
 						formattedText = extractedScore + " " + formattedDate;
 
-						StringBuilder stringBuilder = new StringBuilder();
-						stringBuilder.Append(formattedText);
-						
-						string outItemText = stringBuilder.ToString();
-						allOutsList.Add(outItemText);
-						//switch (counter)
-						//{
-						//	case 0:
-						//		First.Text = formattedText;
-						//		break;
-						//	case 1:
-						//		Second.Text = formattedText;
-						//		break;
-						//	case 2:
-						//		Third.Text = formattedText;
-						//		break;
-						//	case 3:
-						//		Fourth.Text = formattedText;
-						//		break;
-						//	case 4:
-						//		Fifth.Text = formattedText;
-						//		break;
-						//	case 5:
-						//		Sixth.Text = formattedText;
-						//		break;
-						//	case 6:
-						//		Seventh.Text = formattedText;
-						//		break;
-						//	case 7:
-						//		Eighth.Text = formattedText;
-						//		break;
-						//	case 8:
-						//		Nineth.Text = formattedText;
-						//		break;
-						//	case 9:
-						//		Tenth.Text = formattedText;
-						//		break;
-						//	default:
-						//		break;
-						//}
-						//counter += 1;
+						allOutsList.Add(formattedText);
+
 					}
-
-					Android.Widget.ListView lstMyList = (Android.Widget.ListView)FindViewById<Android.Widget.ListView>(Resource.Id.MyList);
-					lstMyList.Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, allOutsList);
-
-					//TextView lstItem = (TextView)lstMyList.GetItemAtPosition(1);
-					//lstItem.SetTextColor(Android.Graphics.Color.Yellow);
-					//////////////
+					
 				}
+				else
+				{
+					allOutsList.Add(" ");
+					allOutsList.Add("No High Scores Recorded");
+				}
+
+				Android.Widget.ListView lstMyList = (Android.Widget.ListView)FindViewById<Android.Widget.ListView>(Resource.Id.MyList);
+				lstMyList.Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, allOutsList);
+
+				//TextView lstItem = (TextView)lstMyList.GetItemAtPosition(1);
+				//lstItem.SetTextColor(Android.Graphics.Color.Yellow);
+				//////////////
 			}
 			catch (Exception ex)
 			{
@@ -178,36 +143,6 @@ namespace DartAssistant.Droid.Source.Activities
 				System.Diagnostics.Debug.Print("Error- " + ex.Message);
 				throw (ex);
 			}
-
-		}
-
-		private void InitializeTopScoresList()
-		{
-			OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
-			List<String> allOutsList = new List<String>();
-			Dictionary<int, List<Dart>> allOuts = outCalculator.GetAllOuts();
-			// iterate through the dictionary to get all the outs
-			foreach (KeyValuePair<int, List<Dart>> entry in allOuts)
-			{
-				StringBuilder stringBuilder = new StringBuilder();
-				stringBuilder.Append(entry.Key.ToString());
-				stringBuilder.Append(": ");
-
-				for (int j = 0; j < entry.Value.Count; j++)
-				{
-					stringBuilder.Append(entry.Value[j].Abbreviation);
-					if (j != entry.Value.Count - 1)
-					{
-						stringBuilder.Append(", ");
-					}
-				}
-
-				string outItemText = stringBuilder.ToString();
-				allOutsList.Add(outItemText);
-			}
-
-			Android.Widget.ListView lstMyList = (Android.Widget.ListView)FindViewById<Android.Widget.ListView>(Resource.Id.MyList);
-			lstMyList.Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, allOutsList);
 
 		}
 
