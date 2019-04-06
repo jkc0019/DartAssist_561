@@ -482,7 +482,8 @@ namespace DartAssistant.Droid.Source.Activities
 				}
 				else
 				{
-					text = GetAbbrevOut(score);
+				
+				   text = GetAbbrevOut(score);
 				}
 
 			}
@@ -640,10 +641,10 @@ namespace DartAssistant.Droid.Source.Activities
 
 				TextToSpeech.SpeakAsync(strRecommendedOut);
 
+				strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
 				var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
 				txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut;
 				
-				strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
 				TextToSpeech.SpeakAsync(strRecommendedOut);
 
 			}
@@ -838,7 +839,7 @@ namespace DartAssistant.Droid.Source.Activities
 
 			int score = TotalOut;
 			OutCalculator outCalculator = new OutCalculator(InOutRule.Double);
-			List<Dart> outs = outCalculator.GetDartsForOut(score, clsTurn.DartsRemaining);
+			List<Dart> outs = outCalculator.GetDartsForOut(score);
 
 			StringBuilder stringBuilder = new StringBuilder();
 
