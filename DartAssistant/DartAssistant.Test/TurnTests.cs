@@ -572,16 +572,54 @@ namespace DartAssistant.Test
         #region RecordPointsScored(string)
 
         /// <summary>
-        /// WHEN RecordPointsScored(string) is called with a valid value
+        /// WHEN RecordPointsScored(string) is called with a valid "Scored" value
         /// THEN true is returned.
         /// </summary>
         [TestMethod]
-        public void RecordPointsScoredString_ValidValue_ReturnsTrue()
+        public void RecordPointsScoredString_ValidScoredValue_ReturnsTrue()
         {
             // Arrange
             Turn subject = new Turn(InOutRule.Double);
             subject.SetStartingScore(170);
             string value = string.Format("60 {0}", Turn.SCORED_KEY_WORD);
+
+            // Act
+            bool status = subject.RecordPointsScored(value);
+
+            // Assert
+            Assert.IsTrue(status, "Did not return expected value");
+        }
+
+        /// <summary>
+        /// WHEN RecordPointsScored(string) is called with a valid "Score" value
+        /// THEN true is returned.
+        /// </summary>
+        [TestMethod]
+        public void RecordPointsScoredString_ValidScoreValue_ReturnsTrue()
+        {
+            // Arrange
+            Turn subject = new Turn(InOutRule.Double);
+            subject.SetStartingScore(170);
+            string value = string.Format("60 {0}", Turn.SCORE_KEY_WORD);
+
+            // Act
+            bool status = subject.RecordPointsScored(value);
+
+            // Assert
+            Assert.IsTrue(status, "Did not return expected value");
+        }
+
+        /// <summary>
+        /// WHEN RecordPointsScored(string) is called with a valid "Hit" value
+        /// THEN true is returned.
+        /// </summary>
+        [TestMethod]
+        public void RecordPointsScoredString_ValidHitValue_ReturnsTrue()
+        {
+            // Arrange
+            Turn subject = new Turn(InOutRule.Double);
+            subject.SetStartingScore(170);
+            string value = string.Format("60 {0}", Turn.HIT_KEY_WORD);
 
             // Act
             bool status = subject.RecordPointsScored(value);

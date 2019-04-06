@@ -25,7 +25,7 @@ namespace DartAssistant.Droid.Source.Activities
 			base.OnCreate(savedInstanceState);
 
 			// Create your application here
-			SetContentView(Resource.Layout.NavMain);
+			SetContentView(Resource.Layout.Main);
 
 			turnClassSerial = Intent.GetStringExtra("turnClassSerial"); ;
 			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
@@ -224,7 +224,7 @@ namespace DartAssistant.Droid.Source.Activities
 			{
 
 				case Resource.Id.menu_home:
-					Intent iActivity = new Intent(this, typeof(AndroidNavActivity));
+					Intent iActivity = new Intent(this, typeof(AndroidActivity));
 
 					iActivity.PutExtra("turnClassSerial", turnClassSerial);
 					iActivity.PutExtra("UIClassSerial", UIClassSerial);
@@ -232,7 +232,7 @@ namespace DartAssistant.Droid.Source.Activities
 					StartActivity(iActivity);
 					break;
 				case Resource.Id.menu_chart:
-					Intent ichartActivity = new Intent(this, typeof(OutChartNavActivity));
+					Intent ichartActivity = new Intent(this, typeof(OutChartActivity));
 
 					ichartActivity.PutExtra("turnClassSerial", turnClassSerial);
 					ichartActivity.PutExtra("UIClassSerial", UIClassSerial);
@@ -240,7 +240,7 @@ namespace DartAssistant.Droid.Source.Activities
 
 					break;
 				case Resource.Id.menu_rules:
-					Intent irulesActivity = new Intent(this, typeof(Activity3));
+					Intent irulesActivity = new Intent(this, typeof(RulesActivity));
 
 					irulesActivity.PutExtra("turnClassSerial", turnClassSerial);
 					irulesActivity.PutExtra("UIClassSerial", UIClassSerial);

@@ -118,6 +118,81 @@ namespace DartAssistant.Test
             Assert.AreEqual(0, subject.Count, "Unexpected number of darts");
         }
 
+        /// <summary>
+        /// WHEN ever GetDartsForOut() is called with darts remaining less than 3
+        /// THEN an appropriate recommended out is returned.
+        /// </summary>
+        [TestMethod]
+        public void GetDartsForOut_Provide2DartsRemaining_ReturnsExpectedOut()
+        {
+            // Arrange
+            OutCalculator calculator = new OutCalculator(InOutRule.Double);
+
+            // Act
+            List<Dart> subject = calculator.GetDartsForOut(90, 2);
+
+            // Assert
+            Assert.IsNotNull(subject, "Return was null when not expected");
+            Assert.AreEqual(2, subject.Count, "Unexpected number of darts");
+            Assert.AreEqual("T18", subject[0].Abbreviation, "Unexpected second dart");
+            Assert.AreEqual("D18", subject[1].Abbreviation, "Unexpected third dart");
+        }
+
+        /// <summary>
+        /// WHEN ever GetDartsForOut() is called with darts remaining less than 3 with no matching out
+        /// THEN an empty List of Darts is returned.
+        /// </summary>
+        [TestMethod]
+        public void GetDartsForOut_Provide2DartsRemainingWithNoPossibleOut_ReturnsExpectedOut()
+        {
+            // Arrange
+            OutCalculator calculator = new OutCalculator(InOutRule.Double);
+
+            // Act
+            List<Dart> subject = calculator.GetDartsForOut(121, 2);
+
+            // Assert
+            Assert.IsNotNull(subject, "Return was null when not expected");
+            Assert.AreEqual(0, subject.Count, "Unexpected number of darts");
+        }
+
+        /// <summary>
+        /// WHEN ever GetDartsForOut() is called with darts remaining less than 3
+        /// THEN an appropriate recommended out is returned.
+        /// </summary>
+        [TestMethod]
+        public void GetDartsForOut_Provide1DartsRemaining_ReturnsExpectedOut()
+        {
+            // Arrange
+            OutCalculator calculator = new OutCalculator(InOutRule.Double);
+
+            // Act
+            List<Dart> subject = calculator.GetDartsForOut(38, 1);
+
+            // Assert
+            Assert.IsNotNull(subject, "Return was null when not expected");
+            Assert.AreEqual(1, subject.Count, "Unexpected number of darts");
+            Assert.AreEqual("D19", subject[0].Abbreviation, "Unexpected second dart");
+        }
+
+        /// <summary>
+        /// WHEN ever GetDartsForOut() is called with darts remaining less than 3 with no matching out
+        /// THEN an empty List of Darts is returned.
+        /// </summary>
+        [TestMethod]
+        public void GetDartsForOut_Provide1DartsRemainingWithNoPossibleOut_ReturnsExpectedOut()
+        {
+            // Arrange
+            OutCalculator calculator = new OutCalculator(InOutRule.Double);
+
+            // Act
+            List<Dart> subject = calculator.GetDartsForOut(51, 1);
+
+            // Assert
+            Assert.IsNotNull(subject, "Return was null when not expected");
+            Assert.AreEqual(0, subject.Count, "Unexpected number of darts");
+        }
+
         #endregion
     }
 }
