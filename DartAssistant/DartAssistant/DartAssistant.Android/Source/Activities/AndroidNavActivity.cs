@@ -21,6 +21,7 @@ namespace DartAssistant.Droid.Source.Activities
 	[Activity(Label = "@string/app_name", MainLauncher = true)]
 	public class AndroidNavActivity : AppCompatActivity
 	{
+	
 		SpeechRecognizer Recognizer { get; set; }
 		Intent SpeechIntent { get; set; }
 
@@ -47,11 +48,11 @@ namespace DartAssistant.Droid.Source.Activities
 		Turn clsTurn = new Turn(InOutRule.Double);
 		//Class to store some UI info
 		UIState clsUIState = new UIState();
-
+		
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
-
+			
 			SetContentView(Resource.Layout.NavGame);
 
 			//Logging
@@ -380,12 +381,13 @@ namespace DartAssistant.Droid.Source.Activities
 
 				var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
 				txtOutTurn.Text = "(" + txtStartScore.Text + ") " + strRecommendedOut;
-
+				
 				currentScore = startingScore;
 				clsUIState.CurrentScoreText = txtNewOut.Text;
 				clsUIState.DoubleOutText = txtOutTurn.Text;
 
 				TextToSpeech.SpeakAsync(txtStartScore.Text + " Starting Score");
+				TextToSpeech.SpeakAsync(strRecommendedOut);
 			}
 			else
 			{
@@ -443,7 +445,13 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 
 			TextToSpeech.SpeakAsync(strNewOut);
+			
+			string strRecommendedOut = "";
+			strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
+			var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+			txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut;
 
+			TextToSpeech.SpeakAsync(strRecommendedOut);
 		}
 
 		private void BtnGetOut_Click(object sender, System.EventArgs e)
@@ -631,6 +639,12 @@ namespace DartAssistant.Droid.Source.Activities
 
 				TextToSpeech.SpeakAsync(strRecommendedOut);
 
+				var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+				txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut;
+				
+				strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
+				TextToSpeech.SpeakAsync(strRecommendedOut);
+
 			}
 			else if (fmtInput.Contains("start") && recognized.ToLower().IndexOf("start") > 1)
 			{
@@ -673,7 +687,8 @@ namespace DartAssistant.Droid.Source.Activities
 					clsUIState.DoubleOutText = txtOutTurn.Text;
 
 					TextToSpeech.SpeakAsync(txtStartScore.Text + " Starting Score");
-					
+					TextToSpeech.SpeakAsync(strRecommendedOut);
+
 				}
 				
 			}
@@ -714,6 +729,11 @@ namespace DartAssistant.Droid.Source.Activities
 			txtOutTurn.Text = "";
 			clsUIState.DoubleOutText = txtOutTurn.Text;
 
+			string totalScore = (clsTurn.FirstDartPoints + clsTurn.SecondDartPoints + clsTurn.ThirdDartPoints).ToString();
+		
+			PreferenceStore clsPrefStore = new PreferenceStore();
+			bool scoreStored = clsPrefStore.CheckScoresTopList(totalScore);
+			
 		}
 
 		private string GetNewScore(string ThrownScore)

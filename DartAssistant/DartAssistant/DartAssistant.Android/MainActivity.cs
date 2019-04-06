@@ -30,7 +30,7 @@ namespace DartAssistant.Droid
 			Instance = this;
 			assets = this.Assets;
 			Xamarin.Forms.DependencyService.Register<IActivityHelper, ActivityHelper>();
-			LoadApplication(new App());
+			//LoadApplication(new App());
 
 		}
 

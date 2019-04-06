@@ -3130,8 +3130,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f090035
 			public const int META = 2131296309;
 			
-			// aapt resource value: 0x7f0900cb
-			public const int MyList = 2131296459;
+			// aapt resource value: 0x7f0900ca
+			public const int MyList = 2131296458;
 			
 			// aapt resource value: 0x7f090036
 			public const int SHIFT = 2131296310;
@@ -3724,8 +3724,8 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f09001b
 			public const int text2 = 2131296283;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int textAllOuts = 2131296458;
+			// aapt resource value: 0x7f0900cb
+			public const int textAllOuts = 2131296459;
 			
 			// aapt resource value: 0x7f09006a
 			public const int textSpacerNoButtons = 2131296362;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DartAssistant
 {
@@ -20,5 +19,6 @@ namespace DartAssistant
 		/// Gets the double out text.
 		/// </summary>
 		public string DoubleOutText { get; set; }
+
 	}
 }
