@@ -48,7 +48,7 @@ namespace DartAssistant
         {
             Dictionary<int, List<Dart>> outChart = new DoubleOutSplitBullOuts();
 
-            List<Dart> outDarts = outChart.Where(x => x.Key == score && x.Value.Count == dartsAvailable)
+            List<Dart> outDarts = outChart.Where(x => x.Key == score && x.Value.Count <= dartsAvailable)
                 .Select(x => x.Value)
                 .SingleOrDefault();
 
