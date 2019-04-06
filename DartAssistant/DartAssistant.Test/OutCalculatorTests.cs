@@ -119,6 +119,24 @@ namespace DartAssistant.Test
         }
 
         /// <summary>
+        /// WHEN ever GetDartsForOut() is called with a number that only takes 2 darts with default 3 darts remaining
+        /// THEN a proper two dart out is returned.
+        /// </summary>
+        [TestMethod]
+        public void GetDartsForOut_OnlyTwoDartOutWithThreeDarts_ReturnsExpectedTwoDartOut()
+        {
+            // Arrange
+            OutCalculator calculator = new OutCalculator(InOutRule.Double);
+
+            // Act
+            List<Dart> subject = calculator.GetDartsForOut(60);
+
+            // Assert
+            Assert.IsNotNull(subject, "Return was null when not expected");
+            Assert.AreEqual(2, subject.Count, "Unexpected number of darts");
+        }
+
+        /// <summary>
         /// WHEN ever GetDartsForOut() is called with darts remaining less than 3
         /// THEN an appropriate recommended out is returned.
         /// </summary>
