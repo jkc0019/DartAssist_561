@@ -15,4 +15,9 @@
   <color name="secondaryText">#727272</color>
   <color name="divider">#B6B6B6</color>
   <color name="activated_color">#E8E8E8</color>
+  
+  <!--Splash Screen-->
+  <color name="window_background">#F5F5F5</color>
+  <color name="splash_background">#FFFFFF</color>
+  
 </resources>

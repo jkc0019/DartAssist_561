@@ -75,7 +75,7 @@
 						android:padding="10sp"
 						android:inputType="phone"
 						android:imeOptions="actionDone"
-						android:hint="Enter Out Number"
+						android:hint="Out Number"
 						android:layout_weight="2" 
 	/>
 					<Button
@@ -95,16 +95,16 @@
 						android:layout_weight="1" 
 			/>
 				</LinearLayout>
-					<TextView
-						android:text="Out Label"
-						android:textAppearance="?android:attr/textAppearanceMedium"
-						android:textAlignment="center"
-						android:textColor="@color/primaryDark"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:padding="10sp"
-						android:id="@+id/txtOutLabel"
-						android:gravity="center"
+				<TextView
+					android:text="Out Label"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:textAlignment="center"
+					android:textColor="@color/primaryDark"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="10sp"
+					android:id="@+id/txtOutLabel"
+					android:gravity="center"
 					/>
 				<LinearLayout
 					android:orientation="horizontal"
@@ -114,7 +114,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:id="@+id/linearLayout5"
-					android:layout_marginTop="20sp">
+					android:layout_marginTop="10sp">
 					<EditText
 						android:id="@+id/StartScore"
 						android:text=""
@@ -123,17 +123,23 @@
 						android:layout_height="match_parent"
 						android:inputType="phone"
 						android:imeOptions="actionDone"
-						android:hint="Enter Starting Score"
+						android:hint="Starting Score"
 						android:layout_weight="3"
 						android:padding="10sp" 
 			/>
+					<ImageView
+						android:src="@drawable/record"
+						android:layout_width="30sp"
+						android:layout_height="50sp"
+						android:id="@+id/imgRecord" />
 					<Button
 						android:id="@+id/btn_StartTurn"
 						android:text="Start Turn"
 						android:layout_height="match_parent"
 						android:padding="10sp"
-						android:layout_width="0dp"
+						android:layout_width="20sp"
 						android:layout_weight="2"
+						android:width="20sp"
 			/>
 				</LinearLayout>
 				<LinearLayout
@@ -142,7 +148,8 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:id="@+id/relativeLayout2"
-					android:paddingHorizontal="10sp">
+					android:paddingHorizontal="10sp"
+					android:paddingBottom="10sp">
 					<EditText
 						android:id="@+id/DartScore"
 						android:text=""
@@ -164,7 +171,7 @@
 						android:layout_width="0dp"
 						android:layout_weight="2"
 			/>
-				</LinearLayout>
+			</LinearLayout>
 				<TextView
 					android:text="Current Score"
 					android:textAppearance="?android:attr/textAppearanceMedium"
@@ -181,10 +188,30 @@
 					android:textColor="@color/primaryDark"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:padding="10sp"
+					android:paddingBottom="20sp"
 					android:id="@+id/txtOutTurn"
 					android:gravity="center"
 				/>
+				<LinearLayout
+					android:minWidth="25px"
+					android:minHeight="25px"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/relativeLayout2"
+					android:paddingHorizontal="10sp"
+					android:paddingVertical="10sp">
+					<TextView
+					android:text="Mute"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:layout_width="110px"
+					android:layout_height="wrap_content"
+					android:id="@+id/MuteLabel" />
+					<Switch
+					android:layout_width="160px"
+					android:layout_height="wrap_content"
+					android:id="@+id/MuteSwitch" 
+					android:textOn="Mute"/>
+				</LinearLayout>
 			</LinearLayout>
 		</FrameLayout>
     <android.support.design.widget.BottomNavigationView

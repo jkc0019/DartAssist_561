@@ -32,11 +32,6 @@ namespace DartAssistant.Droid.Source.Activities
 			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
 			System.Diagnostics.Debug.Print("-" + UIClassSerial);
 
-			//Button button = FindViewById<Button>(Resource.Id.btn_Back);
-			//button.Click += delegate {
-			//	StartActivity(typeof(AndroidActivity));
-			//};
-
 			// Create your application here
 			InitializeOutChart();
 

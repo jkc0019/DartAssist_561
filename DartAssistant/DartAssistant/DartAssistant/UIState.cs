@@ -20,5 +20,9 @@ namespace DartAssistant
 		/// </summary>
 		public string DoubleOutText { get; set; }
 
+		/// <summary>
+		/// Gets the Muted Toggle Value.
+		/// </summary>
+		public bool IsMuted { get; set; }
 	}
 }

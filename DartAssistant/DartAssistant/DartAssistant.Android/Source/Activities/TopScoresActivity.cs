@@ -18,7 +18,7 @@ namespace DartAssistant.Droid.Source.Activities
 		string turnClassSerial = "";
 		
 		//Define Instance or Preference Interface for storing data
-		ISharedPreferences pref = Android.App.Application.Context.GetSharedPreferences("TopScore", FileCreationMode.Private);
+		ISharedPreferences pref = Android.App.Application.Context.GetSharedPreferences("TopScores", FileCreationMode.Private);
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -104,7 +104,7 @@ namespace DartAssistant.Droid.Source.Activities
 				string formattedText = "";
 				List<String> allOutsList = new List<String>();
 
-				if (savedHighScores.Length > 0)
+				if (scores.Trim().Length > 0)
 				{
 					allOutsList.Add(" ");
 					allOutsList.Add("Score" + "Date".ToString().PadLeft(15, ' '));

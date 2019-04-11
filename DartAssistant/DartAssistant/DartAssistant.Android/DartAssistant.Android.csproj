@@ -72,11 +72,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActivityHelper.cs" />
     <Compile Include="Source\Activities\AndroidActivity.cs" />
+    <Compile Include="Source\Activities\TurnOverActivity.cs" />
     <Compile Include="Source\Activities\RulesActivity.cs" />
+    <Compile Include="Source\Activities\BustActivity.cs" />
+    <Compile Include="Source\Activities\WinActivity.cs" />
     <Compile Include="Source\Activities\TopScoresActivity.cs" />
     <Compile Include="Source\Activities\Activity5.cs" />
     <Compile Include="Source\Activities\OutChartActivity.cs" />
     <Compile Include="Source\Listeners\RecognitionListener.cs" />
+    <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -282,9 +286,53 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\DartRules.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\record.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\TopScores.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\win_screen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\WinCrop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dartSplash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bust_screen.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\busted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\turnover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\turnover_screen.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\turnover2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

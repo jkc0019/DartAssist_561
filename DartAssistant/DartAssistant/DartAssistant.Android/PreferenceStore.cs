@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+
 
 namespace DartAssistant.Droid
 {
@@ -16,7 +9,7 @@ namespace DartAssistant.Droid
 	{
 
 		//Define Instance or Preference Interface for storing data
-		ISharedPreferences pref = Android.App.Application.Context.GetSharedPreferences("TopScore", FileCreationMode.Private);
+		ISharedPreferences pref = Android.App.Application.Context.GetSharedPreferences("TopScores", FileCreationMode.Private);
 
 		public bool CheckScoresTopList(string totalScore)
 		{
