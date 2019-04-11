@@ -722,7 +722,14 @@ namespace DartAssistant.Droid.Source.Activities
 			{
 				txtYourScore.Text = recognized;
 
-				fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("out") - 1));
+				if (!fmtInput.Contains(" "))
+				{
+					fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("out")));
+				}
+				else
+				{
+					fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("out") - 1));
+				}
 
 				bool Result = false;
 				Result = int.TryParse(fmtInput, out TotalScore);
