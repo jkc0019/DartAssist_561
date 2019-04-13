@@ -24,5 +24,16 @@ namespace DartAssistant
 		/// Gets the Muted Toggle Value.
 		/// </summary>
 		public bool IsMuted { get; set; }
+
+		/// <summary>
+		/// Gets the IsListening Toggle Value.
+		/// </summary>
+		public bool IsListening { get; set; }
+
+		/// <summary>
+		/// Gets the InitialStartupOver Toggle Value.
+		/// </summary>
+		public bool InitialStartupOver { get; set; }
+
 	}
 }

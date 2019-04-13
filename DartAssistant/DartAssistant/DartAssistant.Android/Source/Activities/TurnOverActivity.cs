@@ -13,12 +13,14 @@ namespace DartAssistant.Droid
     {
 		bool isMuted = false;
 		int outScore = 0;
+		bool InitialStartupOver = true;
 
 		public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
         {
             base.OnCreate(savedInstanceState, persistentState);
 			outScore = Intent.GetIntExtra("OutScore", 0);
 			isMuted = Intent.GetBooleanExtra("IsMuted", false);
+			InitialStartupOver = Intent.GetBooleanExtra("InitialStartOver", true);
 		}
 
         // Launches the startup task
@@ -27,6 +29,7 @@ namespace DartAssistant.Droid
             base.OnResume();
 			outScore = Intent.GetIntExtra("OutScore", 0);
 			isMuted = Intent.GetBooleanExtra("IsMuted", false);
+			InitialStartupOver = Intent.GetBooleanExtra("InitialStartOver", true);
 
 			try
 			{
@@ -51,7 +54,11 @@ namespace DartAssistant.Droid
 			{
 				try
 				{
-					TextToSpeech.SpeakAsync("Last Score " + outScore.ToString() + ". Turn Over!");
+					if (!isMuted)
+					{
+						TextToSpeech.SpeakAsync("Last Score " + outScore.ToString() + ". Turn Over!");
+					}
+					
 				}
 				catch (System.Exception ex)
 				{
@@ -60,13 +67,18 @@ namespace DartAssistant.Droid
 			}
 			else
 			{
-				TextToSpeech.SpeakAsync("Turn Over!");
+				if (!isMuted)
+				{
+					TextToSpeech.SpeakAsync("Turn Over!");
+				}
+				
 			}
 
 			await Task.Delay(3000);
 			Intent iActivity = new Intent(this, typeof(Source.Activities.AndroidActivity));
 
 			iActivity.PutExtra("IsMuted", isMuted);
+			iActivity.PutExtra("InitialStartOver", InitialStartupOver);
 
 			StartActivity(iActivity);
 			
