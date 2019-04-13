@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
+using System.Threading.Tasks;
 
 namespace DartAssistant.Droid.Source.Activities
 {
@@ -22,8 +23,8 @@ namespace DartAssistant.Droid.Source.Activities
 	[Activity(Label = "@string/app_name",ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
 	public class AndroidActivity : AppCompatActivity
 	{
-	
-		SpeechRecognizer Recognizer { get; set; }
+        RecognitionListener recListener;
+        SpeechRecognizer Recognizer { get; set; }
 		Intent SpeechIntent { get; set; }
 
 		bool isListeningPaused = false;
@@ -170,24 +171,30 @@ namespace DartAssistant.Droid.Source.Activities
 			BtnStartSpeech.Click += BtnStartSpeech_Click;
 			BtnStartSpeech.Visibility = Android.Views.ViewStates.Gone;
 
-			var recListener = new RecognitionListener();
+			recListener = new RecognitionListener();
 			recListener.BeginSpeech += RecListener_BeginSpeech;
 			recListener.EndSpeech += RecListener_EndSpeech;
-			recListener.Error += RecListener_Error;
-			recListener.Ready += RecListener_Ready;
-			recListener.Recognized += RecListener_Recognized;
+            recListener.Error += RecListener_Error;
+            //recListener.Error += Kld_Error;
+            recListener.Ready += RecListener_Ready;
+            recListener.Recognized += RecListener_Recognized;
+            //recListener.Recognized += Kld_Recognized;
 
-			Recognizer = SpeechRecognizer.CreateSpeechRecognizer(this);
-			Recognizer.SetRecognitionListener(recListener);
+            // This does the same as the commented out code below
+            Kld_CreateSpeechRecognizer();
 
-			SpeechIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-			SpeechIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
-			SpeechIntent.PutExtra(RecognizerIntent.ExtraCallingPackage, PackageName);
+   //         Recognizer = SpeechRecognizer.CreateSpeechRecognizer(this);
+			//Recognizer.SetRecognitionListener(recListener);
+
+			//SpeechIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+			//SpeechIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
+			//SpeechIntent.PutExtra(RecognizerIntent.ExtraCallingPackage, PackageName);
 
 			var BtnStartTurn = FindViewById<Android.Widget.Button>(Resource.Id.btn_StartTurn);
-			BtnStartTurn.Click += BtnStartTurn_Click;
-			
-			var BtnDartScored = FindViewById<Android.Widget.Button>(Resource.Id.btn_DartScored);
+             BtnStartTurn.Click += BtnStartTurn_Click;
+            //BtnStartTurn.Click += Kld_BtnStartTurn_Click;
+
+            var BtnDartScored = FindViewById<Android.Widget.Button>(Resource.Id.btn_DartScored);
 			BtnDartScored.Click += BtnDartScored_Click;
 
 			var BtnGetOut = FindViewById<Android.Widget.Button>(Resource.Id.btn_GetOut);
@@ -238,7 +245,62 @@ namespace DartAssistant.Droid.Source.Activities
 
 		}
 
-		protected override void OnSaveInstanceState(Bundle outsInstanceState)
+        private void Kld_CreateSpeechRecognizer()
+        {
+            Recognizer = SpeechRecognizer.CreateSpeechRecognizer(this);
+            Recognizer.SetRecognitionListener(recListener);
+
+            SpeechIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+            SpeechIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
+            SpeechIntent.PutExtra(RecognizerIntent.ExtraCallingPackage, PackageName);
+        }
+
+        private void Kld_Error(object sender, SpeechRecognizerError e)
+        {
+            if (SpeechRecognizerError.SpeechTimeout == e)
+            {
+                Recognizer.Destroy();
+
+                Kld_CreateSpeechRecognizer();
+
+                Recognizer.StartListening(SpeechIntent);
+            }
+        }
+
+        private void Kld_Recognized(object sender, string e)
+        {
+            Toast.MakeText(this, e, ToastLength.Long).Show();
+
+            if("stop".ToUpper() == e.ToUpper())
+            {
+                ImageView imgRecord;
+                imgRecord = FindViewById<Android.Widget.ImageView>(Resource.Id.imgRecord);
+                imgRecord.Visibility = Android.Views.ViewStates.Invisible;
+                Recognizer.StopListening();
+                return;
+            }
+
+            TextToSpeech.SpeakAsync("What's up?").ContinueWith(OnContinue, TaskScheduler.FromCurrentSynchronizationContext());
+
+            // With multiple SpeakAsync calls
+            //Task.WhenAll(
+            //    TextToSpeech.SpeakAsync("Hello World 1"),
+            //    TextToSpeech.SpeakAsync("Hello World 2"),
+            //    TextToSpeech.SpeakAsync("Hello World 3"))
+            //    .ContinueWith(OnContinue, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        private void OnContinue(Task t)
+        {
+            Recognizer.StartListening(SpeechIntent);
+        }
+
+        private void Kld_BtnStartTurn_Click(object sender, EventArgs e)
+        {
+            Recognizer.StartListening(SpeechIntent);
+        }
+
+        protected override void OnSaveInstanceState(Bundle outsInstanceState)
 		{
 
 			string savedTurn = JsonConvert.SerializeObject(clsTurn);
@@ -754,7 +816,12 @@ namespace DartAssistant.Droid.Source.Activities
 
 				TextToSpeech.SpeakAsync(strRecommendedOut);
 
-			}
+                //TextToSpeech.SpeakAsync(strRecommendedOut).ContinueWith((t) =>
+                //{
+                //    Recognizer.StartListening(SpeechIntent);
+                //}, TaskScheduler.FromCurrentSynchronizationContext());
+
+            }
 			else if (((fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1) || 
 					(fmtInput.Contains("hit") && recognized.ToLower().IndexOf("hit") > 1)) && clsTurn.State == TurnState.InProgress)
 			{
