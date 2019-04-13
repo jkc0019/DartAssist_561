@@ -185,12 +185,12 @@ namespace DartAssistant.Test
             OutCalculator calculator = new OutCalculator(InOutRule.Double);
 
             // Act
-            List<Dart> subject = calculator.GetDartsForOut(38, 1);
+            List<Dart> subject = calculator.GetDartsForOut(50, 1);
 
             // Assert
             Assert.IsNotNull(subject, "Return was null when not expected");
             Assert.AreEqual(1, subject.Count, "Unexpected number of darts");
-            Assert.AreEqual("D19", subject[0].Abbreviation, "Unexpected second dart");
+            Assert.AreEqual("DB", subject[0].Abbreviation, "Unexpected dart");
         }
 
         /// <summary>

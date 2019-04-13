@@ -99,7 +99,7 @@
 					android:text="Out Label"
 					android:textAppearance="?android:attr/textAppearanceMedium"
 					android:textAlignment="center"
-					android:textColor="@color/primaryDark"
+					android:textColor="@color/secondaryText"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="10sp"
@@ -175,7 +175,7 @@
 				<TextView
 					android:text="Current Score"
 					android:textAppearance="?android:attr/textAppearanceMedium"
-					android:textColor="@color/primaryDark"
+					android:textColor="@color/secondaryText"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:padding="10sp"
@@ -185,7 +185,7 @@
 				<TextView
 					android:text="Suggested Out"
 					android:textAppearance="?android:attr/textAppearanceMedium"
-					android:textColor="@color/primaryDark"
+					android:textColor="@color/secondaryText"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:paddingBottom="20sp"
@@ -205,7 +205,8 @@
 					android:textAppearance="?android:attr/textAppearanceMedium"
 					android:layout_width="110px"
 					android:layout_height="wrap_content"
-					android:id="@+id/MuteLabel" />
+					android:id="@+id/MuteLabel" 
+					android:textColor="@color/primaryText"/>
 					<Switch
 					android:layout_width="160px"
 					android:layout_height="wrap_content"

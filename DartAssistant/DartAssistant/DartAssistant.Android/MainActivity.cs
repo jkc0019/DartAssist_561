@@ -8,7 +8,7 @@ using Android.Speech;
 
 namespace DartAssistant.Droid
 {
-    [Activity(Label = "DartAssistant", Icon = "@mipmap/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "DartAssistant", Icon = "@mipmap/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		private readonly int VOICE = 10;

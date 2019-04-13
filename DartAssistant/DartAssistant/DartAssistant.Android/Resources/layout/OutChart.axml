@@ -45,7 +45,8 @@
 		android:textAppearance="?android:attr/textAppearanceMedium"
 		android:textAlignment="center"
 		android:padding="10sp"
-					android:background="@color/primary"
+		android:background="@color/primary"
+		android:textColor="@color/primaryText"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/textAllOuts" />

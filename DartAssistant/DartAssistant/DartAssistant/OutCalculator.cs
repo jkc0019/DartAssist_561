@@ -46,11 +46,35 @@ namespace DartAssistant
         /// <returns>List of Darts that represents the recommended darts to throw to take out the given score. Will be empty list if there is no possible out.</returns>
         public List<Dart> GetDartsForOut(int score, int dartsAvailable = 3)
         {
-            Dictionary<int, List<Dart>> outChart = new DoubleOutSplitBullOuts();
+            List<Dart> outDarts = null;
 
-            List<Dart> outDarts = outChart.Where(x => x.Key == score && x.Value.Count <= dartsAvailable)
-                .Select(x => x.Value)
-                .SingleOrDefault();
+            switch(dartsAvailable)
+            {
+                case 3:
+                    {
+                        Dictionary<int, List<Dart>> outChart = new DoubleOutSplitBullOuts();
+                        outDarts = outChart.Where(x => x.Key == score)
+                            .Select(x => x.Value)
+                            .SingleOrDefault();
+                        break;
+                    }
+                case 2:
+                    {
+                        Dictionary<int, List<Dart>> outChart = new TwoDartOuts();
+                        outDarts = outChart.Where(x => x.Key == score)
+                            .Select(x => x.Value)
+                            .SingleOrDefault();
+                        break;
+                    }
+                case 1:
+                    {
+                        Dictionary<int, List<Dart>> outChart = new OneDartOuts();
+                        outDarts = outChart.Where(x => x.Key == score)
+                            .Select(x => x.Value)
+                            .SingleOrDefault();
+                        break;
+                    }
+            }
 
             return outDarts ?? new List<Dart>();
         }
