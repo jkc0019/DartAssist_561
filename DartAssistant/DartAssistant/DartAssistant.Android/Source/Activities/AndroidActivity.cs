@@ -772,159 +772,159 @@ namespace DartAssistant.Droid.Source.Activities
 					AsyncSpeak(strRecommendedOut);
 
 				}
-				else if ((fmtInput.Contains("triple") && recognized.ToLower().IndexOf("triple") == 0))
-				{
-					fmtInput = recognized.ToLower().Substring((recognized.ToLower().IndexOf("triple") + 6));
+				//else if ((fmtInput.Contains("triple") && recognized.ToLower().IndexOf("triple") == 0))
+				//{
+				//	fmtInput = recognized.ToLower().Substring((recognized.ToLower().IndexOf("triple") + 6));
 
-					int DoubleScore = clsTurn.CurrentScore;
+				//	int DoubleScore = clsTurn.CurrentScore;
 
-					bool Result = false;
-					Result = int.TryParse(fmtInput, out SingleScore);
+				//	bool Result = false;
+				//	Result = int.TryParse(fmtInput, out SingleScore);
 
-					if (true != Result)
-					{
-						SingleScore = -1;
-						strRecommendedOut = "Unknown Score";
-					}
-					else if (20 < SingleScore || 0 == SingleScore)
-					{
-						SingleScore = -1;
-						strRecommendedOut = "Unknown Score";
-					}
-					else
-					{
-						SingleScore = SingleScore * 3;
+				//	if (true != Result)
+				//	{
+				//		SingleScore = -1;
+				//		strRecommendedOut = "Unknown Score";
+				//	}
+				//	else if (20 < SingleScore || 0 == SingleScore)
+				//	{
+				//		SingleScore = -1;
+				//		strRecommendedOut = "Unknown Score";
+				//	}
+				//	else
+				//	{
+				//		SingleScore = SingleScore * 3;
 
-						var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
-						txtDartScore.Text = SingleScore.ToString();
-						clsUIState.LastScore = SingleScore;
+				//		var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
+				//		txtDartScore.Text = SingleScore.ToString();
+				//		clsUIState.LastScore = SingleScore;
 
-						strRecommendedOut = GetNewScore(SingleScore.ToString());
+				//		strRecommendedOut = GetNewScore(SingleScore.ToString());
 
-						var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
-						txtNewOut.Text = strRecommendedOut;
-						clsUIState.CurrentScoreText = txtNewOut.Text;
+				//		var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
+				//		txtNewOut.Text = strRecommendedOut;
+				//		clsUIState.CurrentScoreText = txtNewOut.Text;
 
-					}
+				//	}
 
-					if (strRecommendedOut == "Win")
-					{
+				//	if (strRecommendedOut == "Win")
+				//	{
 
-						Intent iActivity = new Intent(this, typeof(BustActivity));
+				//		Intent iActivity = new Intent(this, typeof(BustActivity));
 
-						iActivity.PutExtra("IsMuted", isMuted);
+				//		iActivity.PutExtra("IsMuted", isMuted);
 
-						StartActivity(iActivity);
+				//		StartActivity(iActivity);
 
-					}
-					else if (strRecommendedOut == "Bust")
-					{
-						Intent iActivity = new Intent(this, typeof(BustActivity));
+				//	}
+				//	else if (strRecommendedOut == "Bust")
+				//	{
+				//		Intent iActivity = new Intent(this, typeof(BustActivity));
 
-						iActivity.PutExtra("IsMuted", isMuted);
+				//		iActivity.PutExtra("IsMuted", isMuted);
 
-						StartActivity(iActivity);
+				//		StartActivity(iActivity);
 
-					}
-					else if (strRecommendedOut == "TurnOver")
-					{
-						Intent iActivity = new Intent(this, typeof(TurnOverActivity));
+				//	}
+				//	else if (strRecommendedOut == "TurnOver")
+				//	{
+				//		Intent iActivity = new Intent(this, typeof(TurnOverActivity));
 
-						iActivity.PutExtra("OutScore", clsTurn.CurrentScore);
-						iActivity.PutExtra("IsMuted", isMuted);
+				//		iActivity.PutExtra("OutScore", clsTurn.CurrentScore);
+				//		iActivity.PutExtra("IsMuted", isMuted);
 
-						StartActivity(iActivity);
+				//		StartActivity(iActivity);
 
-					}
-					else if (clsTurn.State == TurnState.InProgress)
-					{
+				//	}
+				//	else if (clsTurn.State == TurnState.InProgress)
+				//	{
 
-						string strRecommendedOut2 = RecommendedOut(clsTurn.CurrentScore);
-						var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
-						txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut2;
+				//		string strRecommendedOut2 = RecommendedOut(clsTurn.CurrentScore);
+				//		var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+				//		txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut2;
 
-						AsyncSpeak(strRecommendedOut, strRecommendedOut2);
+				//		AsyncSpeak(strRecommendedOut, strRecommendedOut2);
 
-					}
+				//	}
 
-				}
-				else if ((fmtInput.Contains("double") && recognized.ToLower().IndexOf("double") == 0))
-				{
-					fmtInput = recognized.ToLower().Substring((recognized.ToLower().IndexOf("double") + 6));
+				//}
+				//else if ((fmtInput.Contains("double") && recognized.ToLower().IndexOf("double") == 0))
+				//{
+				//	fmtInput = recognized.ToLower().Substring((recognized.ToLower().IndexOf("double") + 6));
 
-					int DoubleScore = clsTurn.CurrentScore;
+				//	int DoubleScore = clsTurn.CurrentScore;
 
-					bool Result = false;
-					Result = int.TryParse(fmtInput, out SingleScore);
+				//	bool Result = false;
+				//	Result = int.TryParse(fmtInput, out SingleScore);
 
-					if (true != Result)
-					{
-						SingleScore = -1;
-						strRecommendedOut = "Unknown Score";
-					}
-					else if ((25 < SingleScore) || (20 < SingleScore && 25 > SingleScore) || 0 == SingleScore)
-					{
-						SingleScore = -1;
-						strRecommendedOut = "Unknown Score";
-					}
-					else
-					{
-						SingleScore = SingleScore * 2;
+				//	if (true != Result)
+				//	{
+				//		SingleScore = -1;
+				//		strRecommendedOut = "Unknown Score";
+				//	}
+				//	else if ((25 < SingleScore) || (20 < SingleScore && 25 > SingleScore) || 0 == SingleScore)
+				//	{
+				//		SingleScore = -1;
+				//		strRecommendedOut = "Unknown Score";
+				//	}
+				//	else
+				//	{
+				//		SingleScore = SingleScore * 2;
 
-						var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
-						txtDartScore.Text = SingleScore.ToString();
-						clsUIState.LastScore = SingleScore;
+				//		var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
+				//		txtDartScore.Text = SingleScore.ToString();
+				//		clsUIState.LastScore = SingleScore;
 
-						strRecommendedOut = GetNewScore(SingleScore.ToString());
+				//		strRecommendedOut = GetNewScore(SingleScore.ToString());
 
-						var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
-						txtNewOut.Text = strRecommendedOut;
-						clsUIState.CurrentScoreText = txtNewOut.Text;
+				//		var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
+				//		txtNewOut.Text = strRecommendedOut;
+				//		clsUIState.CurrentScoreText = txtNewOut.Text;
 
-					}
+				//	}
 
-					if (strRecommendedOut == "Win")
-					{
+				//	if (strRecommendedOut == "Win")
+				//	{
 
-						Intent iActivity = new Intent(this, typeof(WinActivity));
+				//		Intent iActivity = new Intent(this, typeof(WinActivity));
 
-						iActivity.PutExtra("OutScore", SingleScore);
-						iActivity.PutExtra("IsMuted", isMuted);
+				//		iActivity.PutExtra("OutScore", SingleScore);
+				//		iActivity.PutExtra("IsMuted", isMuted);
 
-						StartActivity(iActivity);
+				//		StartActivity(iActivity);
 
-					}
-					else if (strRecommendedOut == "Bust")
-					{
-						Intent iActivity = new Intent(this, typeof(BustActivity));
+				//	}
+				//	else if (strRecommendedOut == "Bust")
+				//	{
+				//		Intent iActivity = new Intent(this, typeof(BustActivity));
 
-						iActivity.PutExtra("IsMuted", isMuted);
+				//		iActivity.PutExtra("IsMuted", isMuted);
 
-						StartActivity(iActivity);
+				//		StartActivity(iActivity);
 
-					}
-					else if (strRecommendedOut == "TurnOver")
-					{
-						Intent iActivity = new Intent(this, typeof(TurnOverActivity));
+				//	}
+				//	else if (strRecommendedOut == "TurnOver")
+				//	{
+				//		Intent iActivity = new Intent(this, typeof(TurnOverActivity));
 
-						iActivity.PutExtra("OutScore", clsTurn.CurrentScore);
-						iActivity.PutExtra("IsMuted", isMuted);
+				//		iActivity.PutExtra("OutScore", clsTurn.CurrentScore);
+				//		iActivity.PutExtra("IsMuted", isMuted);
 
-						StartActivity(iActivity);
+				//		StartActivity(iActivity);
 
-					}
-					else if (clsTurn.State == TurnState.InProgress)
-					{
+				//	}
+				//	else if (clsTurn.State == TurnState.InProgress)
+				//	{
 
-						string strRecommendedOut2 = RecommendedOut(clsTurn.CurrentScore);
-						var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
-						txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut2;
+				//		string strRecommendedOut2 = RecommendedOut(clsTurn.CurrentScore);
+				//		var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+				//		txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut2;
 
-						AsyncSpeak(strRecommendedOut, strRecommendedOut2);
+				//		AsyncSpeak(strRecommendedOut, strRecommendedOut2);
 
-					}
+				//	}
 
-				}
+				//}
 				else if (((fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1) ||
 						(fmtInput.Contains("hit") && recognized.ToLower().IndexOf("hit") > 1)) && clsTurn.State == TurnState.InProgress)
 				{
@@ -962,12 +962,13 @@ namespace DartAssistant.Droid.Source.Activities
 
 					if (strRecommendedOut == "Win")
 					{
-						Intent iActivity = new Intent(this, typeof(BustActivity));
+						Intent iActivity = new Intent(this, typeof(WinActivity));
 
+						iActivity.PutExtra("OutScore", SingleScore);
 						iActivity.PutExtra("IsMuted", isMuted);
 
 						StartActivity(iActivity);
-						
+
 					}
 					else if (strRecommendedOut == "Bust")
 					{
@@ -1074,7 +1075,8 @@ namespace DartAssistant.Droid.Source.Activities
 		{
 			if (true == isMuted)
 			{
-				return;
+				SpeakThis = "";
+				AndSpeakThis = "";
 			}
 
 			// this method called when Speech Recognition is ready
@@ -1101,7 +1103,7 @@ namespace DartAssistant.Droid.Source.Activities
 				}
 				
 			}
-			else if (0 < SpeakThis.Trim().Length)
+			else
 			{
 				if (false == TextOnly)
 				{
