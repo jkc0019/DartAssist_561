@@ -3,7 +3,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Speech;
-using Android.Util;
+//using Android.Util;
 using Android.Widget;
 using Android.Media;
 using System;
@@ -61,7 +61,7 @@ namespace DartAssistant.Droid.Source.Activities
 			SetContentView(Resource.Layout.Game);
 
 			//Logging
-			Log.Debug(GetType().FullName, "Activity A - OnCreate");
+			//Log.Debug(GetType().FullName, "Activity A - OnCreate");
 
 			turnClassSerial = Intent.GetStringExtra("turnClassSerial");
 			UIClassSerial = Intent.GetStringExtra("UIClassSerial");
@@ -117,7 +117,7 @@ namespace DartAssistant.Droid.Source.Activities
 					swcMuteSwitch.Checked = true;
 				}
 
-				Log.Debug(GetType().FullName, "AndroidNavActivity - Recovered instance state");
+				//Log.Debug(GetType().FullName, "AndroidNavActivity - Recovered instance state");
 			}
 			else if (null != turnClassSerial && 0 < turnClassSerial.Trim().Length)
 			{
@@ -155,7 +155,7 @@ namespace DartAssistant.Droid.Source.Activities
 					swcMuteSwitch.Checked = true;
 				}
 
-				Log.Debug(GetType().FullName, "AndroidNavActivity - Loaded Serial");
+				//Log.Debug(GetType().FullName, "AndroidNavActivity - Loaded Serial");
 			}
 			else
 			{
@@ -175,25 +175,14 @@ namespace DartAssistant.Droid.Source.Activities
 			recListener.BeginSpeech += RecListener_BeginSpeech;
 			recListener.EndSpeech += RecListener_EndSpeech;
             recListener.Error += RecListener_Error;
-            //recListener.Error += Kld_Error;
             recListener.Ready += RecListener_Ready;
             recListener.Recognized += RecListener_Recognized;
-            //recListener.Recognized += Kld_Recognized;
-
-            // This does the same as the commented out code below
-            Kld_CreateSpeechRecognizer();
-
-   //         Recognizer = SpeechRecognizer.CreateSpeechRecognizer(this);
-			//Recognizer.SetRecognitionListener(recListener);
-
-			//SpeechIntent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-			//SpeechIntent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
-			//SpeechIntent.PutExtra(RecognizerIntent.ExtraCallingPackage, PackageName);
+            
+            CreateSpeechRecognizer();
 
 			var BtnStartTurn = FindViewById<Android.Widget.Button>(Resource.Id.btn_StartTurn);
              BtnStartTurn.Click += BtnStartTurn_Click;
-            //BtnStartTurn.Click += Kld_BtnStartTurn_Click;
-
+            
             var BtnDartScored = FindViewById<Android.Widget.Button>(Resource.Id.btn_DartScored);
 			BtnDartScored.Click += BtnDartScored_Click;
 
@@ -207,15 +196,24 @@ namespace DartAssistant.Droid.Source.Activities
 			var txtYourScore = FindViewById<Android.Widget.EditText>(Resource.Id.YourScore);
 			txtYourScore.Click += txtYourScore_Click;
 
-			//ToDo Check is we can save real estate like this or is it too jumpy?
-			//Android.Widget.TextView lblOutLabel = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutLabel);
-			//lblOutLabel.Visibility = Android.Views.ViewStates.Gone;
-
-			Log.Debug(nameof(AndroidActivity), nameof(OnCreate));
+			//Log.Debug(nameof(AndroidActivity), nameof(OnCreate));
 			mList.Add("Start");
 			Forms.Init(this, savedInstanceState);
 
 			mAudioManager = (AudioManager)GetSystemService(Context.AudioService);
+
+			if (false == isMuted)
+			{
+				mStreamVolume = mAudioManager.GetStreamVolume(Stream.Music); // getting system volume into var for later un-muting 
+
+				if (mStreamVolume == 0)
+				{
+					mStreamVolume = 8;
+
+					mAudioManager.SetStreamVolume(Stream.Music, mStreamVolume, 0); // setting system volume in case it was left at 0
+				}
+
+			}
 
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			if (toolbar != null)
@@ -245,7 +243,7 @@ namespace DartAssistant.Droid.Source.Activities
 
 		}
 
-        private void Kld_CreateSpeechRecognizer()
+        private void CreateSpeechRecognizer()
         {
             Recognizer = SpeechRecognizer.CreateSpeechRecognizer(this);
             Recognizer.SetRecognitionListener(recListener);
@@ -255,49 +253,23 @@ namespace DartAssistant.Droid.Source.Activities
             SpeechIntent.PutExtra(RecognizerIntent.ExtraCallingPackage, PackageName);
         }
 
-        private void Kld_Error(object sender, SpeechRecognizerError e)
+        private void RecListener_Error(object sender, SpeechRecognizerError e)
         {
             if (SpeechRecognizerError.SpeechTimeout == e)
             {
                 Recognizer.Destroy();
 
-                Kld_CreateSpeechRecognizer();
+                CreateSpeechRecognizer();
 
                 Recognizer.StartListening(SpeechIntent);
             }
         }
 
-        private void Kld_Recognized(object sender, string e)
-        {
-            Toast.MakeText(this, e, ToastLength.Long).Show();
-
-            if("stop".ToUpper() == e.ToUpper())
-            {
-                ImageView imgRecord;
-                imgRecord = FindViewById<Android.Widget.ImageView>(Resource.Id.imgRecord);
-                imgRecord.Visibility = Android.Views.ViewStates.Invisible;
-                Recognizer.StopListening();
-                return;
-            }
-
-            TextToSpeech.SpeakAsync("What's up?").ContinueWith(OnContinue, TaskScheduler.FromCurrentSynchronizationContext());
-
-            // With multiple SpeakAsync calls
-            //Task.WhenAll(
-            //    TextToSpeech.SpeakAsync("Hello World 1"),
-            //    TextToSpeech.SpeakAsync("Hello World 2"),
-            //    TextToSpeech.SpeakAsync("Hello World 3"))
-            //    .ContinueWith(OnContinue, TaskScheduler.FromCurrentSynchronizationContext());
-        }
-
         private void OnContinue(Task t)
         {
-            Recognizer.StartListening(SpeechIntent);
-        }
+			mAudioManager.SetStreamVolume(Stream.Music, 0, 0); // setting system volume to zero, muting
 
-        private void Kld_BtnStartTurn_Click(object sender, EventArgs e)
-        {
-            Recognizer.StartListening(SpeechIntent);
+			Recognizer.StartListening(SpeechIntent);
         }
 
         protected override void OnSaveInstanceState(Bundle outsInstanceState)
@@ -311,33 +283,15 @@ namespace DartAssistant.Droid.Source.Activities
 
 			outsInstanceState.PutBoolean("IsMuted", isMuted);
 
-			Log.Debug(GetType().FullName, "AndroidNavActivity- Saving instance state");
+			//Log.Debug(GetType().FullName, "AndroidNavActivity- Saving instance state");
 
 			// always call the base implementation!
 			base.OnSaveInstanceState(outsInstanceState);
 		}
 
-		protected override void OnDestroy()
-		{
-			Log.Debug(GetType().FullName, "Activity A - On Destroy");
-			base.OnDestroy();
-		}
-
-		protected override void OnPause()
-		{
-			Log.Debug(GetType().FullName, "Activity A - OnPause");
-			base.OnPause();
-		}
-
-		protected override void OnRestart()
-		{
-			Log.Debug(GetType().FullName, "Activity A - OnRestart");
-			base.OnRestart();
-		}
-
 		protected override void OnResume()
 		{
-			Log.Debug(GetType().FullName, "Activity A - OnResume");
+			//Log.Debug(GetType().FullName, "Activity A - OnResume");
 
 			try
 			{
@@ -354,17 +308,6 @@ namespace DartAssistant.Droid.Source.Activities
 			base.OnResume();
 		}
 
-		protected override void OnStart()
-		{
-			Log.Debug(GetType().FullName, "Activity A - OnStart");
-			base.OnStart();
-		}
-
-		protected override void OnStop()
-		{
-			Log.Debug(GetType().FullName, "Activity A - OnStop");
-			base.OnStop();
-		}
 		private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
 		{
 			LoadFragment(e.Item.ItemId);
@@ -437,7 +380,6 @@ namespace DartAssistant.Droid.Source.Activities
 				mStreamVolume = 9;
 			}
 
-			StartTimer();
 		}
 
 		private void txtYourScore_Click(object sender, System.EventArgs e)
@@ -472,9 +414,15 @@ namespace DartAssistant.Droid.Source.Activities
 			string strRecommendedOut = "";
 
 			HideKeyboard();
-
+			
 			var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
 			txtDartScore.Text = "";
+
+			//Clear values for the Get Out objects
+			Android.Widget.TextView txtOutLabel = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutLabel);
+			txtOutLabel.Text = "";
+			var txtYourScore = FindViewById<Android.Widget.EditText>(Resource.Id.YourScore);
+			txtYourScore.Text = "";
 
 			var txtStartScore = FindViewById<Android.Widget.EditText>(Resource.Id.StartScore);
 
@@ -506,14 +454,13 @@ namespace DartAssistant.Droid.Source.Activities
 				currentScore = startingScore;
 				clsUIState.CurrentScoreText = txtNewOut.Text;
 				clsUIState.DoubleOutText = txtOutTurn.Text;
-
-				TextToSpeech.SpeakAsync(txtStartScore.Text + " Starting Score");
-				TextToSpeech.SpeakAsync(strRecommendedOut);
+				
+				AsyncSpeak(txtStartScore.Text + " Starting Score", strRecommendedOut, true);
 			}
 			else
 			{
 				Recognizer.StopListening();
-
+				
 				isListeningPaused = false;
 
 				Recognizer.StartListening(SpeechIntent);
@@ -525,7 +472,13 @@ namespace DartAssistant.Droid.Source.Activities
 					mStreamVolume = 9;
 				}
 
-				StartTimer();
+				mAudioManager.SetStreamVolume(Stream.Music, 0, 0); // setting system volume to zero, muting
+
+				var BtnStartTurn = FindViewById<Android.Widget.Button>(Resource.Id.btn_StartTurn);
+				BtnStartTurn.Enabled = false;
+				var BtnGetOut = FindViewById<Android.Widget.Button>(Resource.Id.btn_GetOut);
+				BtnGetOut.Enabled = false;
+
 			}
 			
 		}
@@ -555,7 +508,6 @@ namespace DartAssistant.Droid.Source.Activities
 				clsUIState.LastScore = dartScore;
 
 				strNewOut = GetNewScore(txtDartScore.Text);
-
 				
 				var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
 				txtNewOut.Text = strNewOut;
@@ -597,14 +549,13 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 			else if (clsTurn.State == TurnState.InProgress)
 			{
-				TextToSpeech.SpeakAsync(strNewOut);
-
+				
 				string strRecommendedOut = "";
 				strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
 				var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
 				txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut;
 
-				TextToSpeech.SpeakAsync(strRecommendedOut);
+				AsyncSpeak(strNewOut, strRecommendedOut, true);
 			}
 			
 		}
@@ -614,13 +565,21 @@ namespace DartAssistant.Droid.Source.Activities
 			Android.Widget.TextView txtOutLabel = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutLabel);
 			var txtYourScore = FindViewById<Android.Widget.EditText>(Resource.Id.YourScore);
 			
-			//txtOutLabel.Visibility = Android.Views.ViewStates.Visible;
-
 			string scoreStr = txtYourScore.Text;
 			int score = 0;
 			string text = "";
 
 			HideKeyboard();
+
+			//Clear values for the Turn objects
+			var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
+			txtNewOut.Text = "";
+			var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+			txtOutTurn.Text = "";
+			var txtStartScore = FindViewById<Android.Widget.EditText>(Resource.Id.StartScore);
+			txtStartScore.Text = "";
+			var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
+			txtDartScore.Text = "";
 
 			if (scoreStr.Trim().Length > 0)
 			{
@@ -652,6 +611,10 @@ namespace DartAssistant.Droid.Source.Activities
 
 				txtOutLabel.Text = "(" + txtYourScore.Text + ") " + text;
 				txtYourScore.Text = "";
+
+				clsTurn.DartsRemaining = 3;
+				string strRecommendedOut = RecommendedOut(score);
+				AsyncSpeak(strRecommendedOut,"", true);
 			}
 			else
 			{
@@ -666,8 +629,13 @@ namespace DartAssistant.Droid.Source.Activities
 				{
 					mStreamVolume = 9;
 				}
+				mAudioManager.SetStreamVolume(Stream.Music, 0, 0); // setting system volume to zero, muting
 
-				StartTimer();
+				var BtnGetOut = FindViewById<Android.Widget.Button>(Resource.Id.btn_GetOut);
+				BtnGetOut.Enabled = false;
+				var BtnStartTurn = FindViewById<Android.Widget.Button>(Resource.Id.btn_StartTurn);
+				BtnStartTurn.Enabled = false;
+
 			}
 			
 		}
@@ -684,7 +652,7 @@ namespace DartAssistant.Droid.Source.Activities
 		}
 		private void RecListener_Ready(object sender, Bundle e)
 		{
-			Log.Debug(nameof(AndroidActivity), nameof(RecListener_Ready));
+			//Log.Debug(nameof(AndroidActivity), nameof(RecListener_Ready));
 			seconds = 1;
 			mList.Add("RecListener_Ready");
 
@@ -692,16 +660,11 @@ namespace DartAssistant.Droid.Source.Activities
 			imgRecord = FindViewById<Android.Widget.ImageView>(Resource.Id.imgRecord);
 			imgRecord.Visibility = Android.Views.ViewStates.Visible;
 
-			//Uncomment This to mute the start/stop listening tones
-			if (isMuted)
-			{
-				mAudioManager.SetStreamVolume(Stream.Music, 0, 0); // setting system volume to zero, muting
-			}
 		}
 
 		private void RecListener_BeginSpeech()
 		{
-			Log.Debug(nameof(AndroidActivity), nameof(RecListener_BeginSpeech));
+			//Log.Debug(nameof(AndroidActivity), nameof(RecListener_BeginSpeech));
 
 			seconds = 2;
 			mList.Add("RecListener_BeginSpeech");
@@ -709,41 +672,32 @@ namespace DartAssistant.Droid.Source.Activities
 		private void RecListener_EndSpeech()
 		{
 
-			Log.Debug(nameof(AndroidActivity), nameof(RecListener_EndSpeech));
+			//Log.Debug(nameof(AndroidActivity), nameof(RecListener_EndSpeech));
+			mAudioManager.SetStreamVolume(Stream.Music, 0, 0);
 
 			ImageView imgRecord;
 			imgRecord = FindViewById<Android.Widget.ImageView>(Resource.Id.imgRecord);
 			imgRecord.Visibility = Android.Views.ViewStates.Invisible;
-
-			if (!isListeningPaused)
-			{
-				seconds = -11;
-			}
-
+			
 			mList.Add("RecListener_EndSpeech");
-		}
-
-		private void RecListener_Error(object sender, SpeechRecognizerError e)
-		{
-			Log.Debug(nameof(AndroidActivity), $"{nameof(RecListener_Error)}={e.ToString()}");
-			mList.Add("RecListener_Error: " + e.ToString());
-
-			if (!isListeningPaused)
-			{
-				seconds = -11;
-			}
 		}
 
 		private void RecListener_Recognized(object sender, string recognized)
 		{
-			Log.Debug(nameof(AndroidActivity), nameof(RecListener_Recognized));
+			string fmtInput = recognized.Trim().ToLower();
+			ProcessText(fmtInput);
+		}
+
+		private void ProcessText(string recognized)
+		{
+			//Log.Debug(nameof(AndroidActivity), nameof(RecListener_Recognized));
 
 			var txtYourScore = FindViewById<Android.Widget.EditText>(Resource.Id.YourScore);
 
 			// this method called when Speech Recognition is ready
 			// also this is the right time to un-mute system volume because the annoying sound played already
 			mAudioManager = (AudioManager)GetSystemService(Context.AudioService);
-			mAudioManager.SetStreamVolume(Stream.Music, mStreamVolume, 0); // again setting the system volume back to the original, un-mutting
+			mAudioManager.SetStreamVolume(Stream.Music, mStreamVolume, 0); // again setting the system volume back to the original, un-muting
 
 			int TotalScore = 0;
 			int SingleScore = 0;
@@ -759,7 +713,7 @@ namespace DartAssistant.Droid.Source.Activities
 				var txtOutLabel = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutLabel);
 				var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
 				var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
-				
+
 				if (true == singleOut)
 				{
 					txtOutLabel.Text = "stopped";
@@ -774,6 +728,13 @@ namespace DartAssistant.Droid.Source.Activities
 				}
 
 				Toast.MakeText(this, "stopped", ToastLength.Long).Show();
+
+				//var BtnStartTurn = FindViewById<Android.Widget.Button>(Resource.Id.btn_StartTurn);
+				//BtnStartTurn.Enabled = true;
+				//var BtnGetOut = FindViewById<Android.Widget.Button>(Resource.Id.btn_GetOut);
+				//BtnGetOut.Enabled = true;
+
+				ResetGame();
 
 				return;
 			}
@@ -807,26 +768,19 @@ namespace DartAssistant.Droid.Source.Activities
 				else
 				{
 					strRecommendedOut = RecommendedOut(TotalScore);
-					//strAbbrevOut = GetAbbrevOut(TotalScore);
 				}
 
 				var txtOutLabel = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutLabel);
 				txtOutLabel.Text = strRecommendedOut;
 				txtYourScore.Text = "";
+				
+				AsyncSpeak(strRecommendedOut);
 
-				TextToSpeech.SpeakAsync(strRecommendedOut);
-
-                //TextToSpeech.SpeakAsync(strRecommendedOut).ContinueWith((t) =>
-                //{
-                //    Recognizer.StartListening(SpeechIntent);
-                //}, TaskScheduler.FromCurrentSynchronizationContext());
-
-            }
-			else if (((fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1) || 
+			}
+			else if (((fmtInput.Contains("score") && recognized.ToLower().IndexOf("score") > 1) ||
 					(fmtInput.Contains("hit") && recognized.ToLower().IndexOf("hit") > 1)) && clsTurn.State == TurnState.InProgress)
 			{
-				//TODO 
-				//implement this after establishing total score tracking
+				
 				if (recognized.ToLower().IndexOf("score") > 1)
 				{
 					fmtInput = recognized.ToLower().Substring(0, (recognized.ToLower().IndexOf("score") - 1));
@@ -852,7 +806,7 @@ namespace DartAssistant.Droid.Source.Activities
 					clsUIState.LastScore = SingleScore;
 
 					strRecommendedOut = GetNewScore(SingleScore.ToString());
-					
+
 					var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
 					txtNewOut.Text = strRecommendedOut;
 					clsUIState.CurrentScoreText = txtNewOut.Text;
@@ -870,7 +824,7 @@ namespace DartAssistant.Droid.Source.Activities
 				else if (strRecommendedOut == "Bust")
 				{
 					Intent iActivity = new Intent(this, typeof(BustActivity));
-					
+
 					iActivity.PutExtra("IsMuted", isMuted);
 
 					StartActivity(iActivity);
@@ -888,13 +842,12 @@ namespace DartAssistant.Droid.Source.Activities
 				}
 				else if (clsTurn.State == TurnState.InProgress)
 				{
-					TextToSpeech.SpeakAsync(strRecommendedOut);
-
-					strRecommendedOut = RecommendedOut(clsTurn.CurrentScore);
+					
+					string strRecommendedOut2 = RecommendedOut(clsTurn.CurrentScore);
 					var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
-					txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut;
+					txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut2;
 
-					TextToSpeech.SpeakAsync(strRecommendedOut);
+					AsyncSpeak(strRecommendedOut, strRecommendedOut2);
 
 				}
 
@@ -930,7 +883,7 @@ namespace DartAssistant.Droid.Source.Activities
 
 					var txtStartScore = FindViewById<Android.Widget.EditText>(Resource.Id.StartScore);
 					txtStartScore.Text = startingScore.ToString();
-					
+
 					var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
 					txtNewOut.Text = txtStartScore.Text + " Left, Darts Remaining: 3";
 					currentScore = startingScore;
@@ -941,14 +894,13 @@ namespace DartAssistant.Droid.Source.Activities
 
 					clsUIState.DoubleOutText = txtOutTurn.Text;
 
-					TextToSpeech.SpeakAsync(txtStartScore.Text + " Starting Score");
-					TextToSpeech.SpeakAsync(strRecommendedOut);
+					AsyncSpeak(txtStartScore.Text + " Starting Score", strRecommendedOut);
 
 				}
-				
+
 			}
 
-			
+
 			mList.Add("RecListener_Recognized");
 
 			if (singleUse)
@@ -962,6 +914,54 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 		}
 
+		private void AsyncSpeak(string SpeakThis, string AndSpeakThis = "", bool TextOnly = false)
+		{
+			if (true == isMuted)
+			{
+				return;
+			}
+
+			// this method called when Speech Recognition is ready
+			// also this is the right time to un-mute system volume because the annoying sound played already
+			mAudioManager = (AudioManager)GetSystemService(Context.AudioService);
+
+			if (0 < AndSpeakThis.Trim().Length)
+			{
+				if (false == TextOnly)
+				{
+					mAudioManager.SetStreamVolume(Stream.Music, mStreamVolume, 0); // again setting the system volume back to the original, un-muting
+
+					// With multiple SpeakAsync calls
+					Task.WhenAll(
+						TextToSpeech.SpeakAsync(SpeakThis),
+						TextToSpeech.SpeakAsync(AndSpeakThis)
+						.ContinueWith(OnContinue, TaskScheduler.FromCurrentSynchronizationContext()));
+
+				}
+				else
+				{
+					TextToSpeech.SpeakAsync(SpeakThis);
+					TextToSpeech.SpeakAsync(AndSpeakThis);
+				}
+				
+			}
+			else if (0 < SpeakThis.Trim().Length)
+			{
+				if (false == TextOnly)
+				{
+					mAudioManager.SetStreamVolume(Stream.Music, mStreamVolume, 0); // again setting the system volume back to the original, un-muting
+
+					TextToSpeech.SpeakAsync(SpeakThis).ContinueWith(OnContinue, TaskScheduler.FromCurrentSynchronizationContext());
+
+				}
+				else
+				{
+					TextToSpeech.SpeakAsync(SpeakThis);
+				}
+				
+			}
+
+		}
 		private void ResetGame()
 		{
 			seconds = 1;
@@ -986,9 +986,7 @@ namespace DartAssistant.Droid.Source.Activities
 
 			int? totalScore = 0;
 			totalScore = clsTurn.FirstDartPoints;
-
-			//string totalScoreString = (clsTurn.FirstDartPoints + clsTurn.SecondDartPoints + clsTurn.ThirdDartPoints).ToString();
-
+			
 			if (clsTurn.SecondDartPoints != null)
 			{
 				totalScore += clsTurn.SecondDartPoints;
@@ -1001,6 +999,10 @@ namespace DartAssistant.Droid.Source.Activities
 			PreferenceStore clsPrefStore = new PreferenceStore();
 			bool scoreStored = clsPrefStore.CheckScoresTopList(totalScore.ToString());
 
+			var BtnStartTurn = FindViewById<Android.Widget.Button>(Resource.Id.btn_StartTurn);
+			BtnStartTurn.Enabled = true;
+			var BtnGetOut = FindViewById<Android.Widget.Button>(Resource.Id.btn_GetOut);
+			BtnGetOut.Enabled = true;
 		}
 
 		private string GetNewScore(string ThrownScore)
@@ -1066,7 +1068,7 @@ namespace DartAssistant.Droid.Source.Activities
 			return strReturnValue;
 		}
 
-		//This gets the out from the classes and vocalizes the words 
+		//This gets the out from the classes for vocalizing the words 
 		private string RecommendedOut(int TotalOut)
 		{
 
@@ -1123,7 +1125,7 @@ namespace DartAssistant.Droid.Source.Activities
 		}
 		private bool UpdateDateTime()
 		{
-			Log.Debug(nameof(AndroidActivity), "UpdateDateTime(): secs=" + seconds.ToString());
+			//Log.Debug(nameof(AndroidActivity), "UpdateDateTime(): secs=" + seconds.ToString());
 
 			if (seconds < pauseTime || seconds == 0)
 			{
@@ -1137,13 +1139,6 @@ namespace DartAssistant.Droid.Source.Activities
 			}
 
 			return true;
-		}
-
-		void StartTimer()
-		{
-			//Initiate the Timer
-			Device.StartTimer(TimeSpan.FromSeconds(1), UpdateDateTime);
-			
 		}
 
 		private void HideKeyboard()
