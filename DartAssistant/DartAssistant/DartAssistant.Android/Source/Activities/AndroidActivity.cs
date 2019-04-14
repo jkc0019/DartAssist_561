@@ -772,6 +772,82 @@ namespace DartAssistant.Droid.Source.Activities
 					AsyncSpeak(strRecommendedOut);
 
 				}
+				else if ((fmtInput.Contains("triple") && recognized.ToLower().IndexOf("triple") == 0))
+				{
+					fmtInput = recognized.ToLower().Substring((recognized.ToLower().IndexOf("triple") + 6));
+
+					int DoubleScore = clsTurn.CurrentScore;
+
+					bool Result = false;
+					Result = int.TryParse(fmtInput, out SingleScore);
+
+					if (true != Result)
+					{
+						SingleScore = -1;
+						strRecommendedOut = "Unknown Score";
+					}
+					else if (20 < SingleScore || 0 == SingleScore)
+					{
+						SingleScore = -1;
+						strRecommendedOut = "Unknown Score";
+					}
+					else
+					{
+						SingleScore = SingleScore * 3;
+
+						var txtDartScore = FindViewById<Android.Widget.EditText>(Resource.Id.DartScore);
+						txtDartScore.Text = SingleScore.ToString();
+						clsUIState.LastScore = SingleScore;
+
+						strRecommendedOut = GetNewScore(SingleScore.ToString());
+
+						var txtNewOut = FindViewById<Android.Widget.TextView>(Resource.Id.txtNewScore);
+						txtNewOut.Text = strRecommendedOut;
+						clsUIState.CurrentScoreText = txtNewOut.Text;
+
+					}
+
+					if (strRecommendedOut == "Win")
+					{
+
+						Intent iActivity = new Intent(this, typeof(BustActivity));
+
+						iActivity.PutExtra("IsMuted", isMuted);
+
+						StartActivity(iActivity);
+
+					}
+					else if (strRecommendedOut == "Bust")
+					{
+						Intent iActivity = new Intent(this, typeof(BustActivity));
+
+						iActivity.PutExtra("IsMuted", isMuted);
+
+						StartActivity(iActivity);
+
+					}
+					else if (strRecommendedOut == "TurnOver")
+					{
+						Intent iActivity = new Intent(this, typeof(TurnOverActivity));
+
+						iActivity.PutExtra("OutScore", clsTurn.CurrentScore);
+						iActivity.PutExtra("IsMuted", isMuted);
+
+						StartActivity(iActivity);
+
+					}
+					else if (clsTurn.State == TurnState.InProgress)
+					{
+
+						string strRecommendedOut2 = RecommendedOut(clsTurn.CurrentScore);
+						var txtOutTurn = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutTurn);
+						txtOutTurn.Text = "(" + clsTurn.CurrentScore.ToString() + ") " + strRecommendedOut2;
+
+						AsyncSpeak(strRecommendedOut, strRecommendedOut2);
+
+					}
+
+				}
 				else if ((fmtInput.Contains("double") && recognized.ToLower().IndexOf("double") == 0))
 				{
 					fmtInput = recognized.ToLower().Substring((recognized.ToLower().IndexOf("double") + 6));
