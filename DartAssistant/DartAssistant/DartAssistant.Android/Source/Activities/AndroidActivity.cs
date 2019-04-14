@@ -728,11 +728,6 @@ namespace DartAssistant.Droid.Source.Activities
 
 				Toast.MakeText(this, "stopped", ToastLength.Long).Show();
 
-				//var BtnStartTurn = FindViewById<Android.Widget.Button>(Resource.Id.btn_StartTurn);
-				//BtnStartTurn.Enabled = true;
-				//var BtnGetOut = FindViewById<Android.Widget.Button>(Resource.Id.btn_GetOut);
-				//BtnGetOut.Enabled = true;
-
 				ResetGame();
 
 				return;
@@ -756,8 +751,6 @@ namespace DartAssistant.Droid.Source.Activities
 				bool Result = false;
 				Result = int.TryParse(fmtInput, out TotalScore);
 
-				clsTurn.DartsRemaining = 3;
-
 				//If not an Int set an out of range value for Total Score
 				if (true != Result)
 				{
@@ -766,7 +759,7 @@ namespace DartAssistant.Droid.Source.Activities
 				}
 				else
 				{
-					strRecommendedOut = RecommendedOut(TotalScore);
+					strRecommendedOut = RecommendedOut(TotalScore,true);
 				}
 
 				var txtOutLabel = FindViewById<Android.Widget.TextView>(Resource.Id.txtOutLabel);
