@@ -612,8 +612,7 @@ namespace DartAssistant.Droid.Source.Activities
 				txtOutLabel.Text = "(" + txtYourScore.Text + ") " + text;
 				txtYourScore.Text = "";
 
-				clsTurn.DartsRemaining = 3;
-				string strRecommendedOut = RecommendedOut(score);
+				string strRecommendedOut = RecommendedOut(score,true);
 				AsyncSpeak(strRecommendedOut,"", true);
 			}
 			else
@@ -1069,13 +1068,25 @@ namespace DartAssistant.Droid.Source.Activities
 		}
 
 		//This gets the out from the classes for vocalizing the words 
-		private string RecommendedOut(int TotalOut)
+		private string RecommendedOut(int TotalOut, bool SingleOut = false)
 		{
 
 			int dartCount = 0;
 
 			OutCalculator clsOutCalc = new OutCalculator(InOutRule.Double);
-			List<Dart> recOut = clsOutCalc.GetDartsForOut(TotalOut,clsTurn.DartsRemaining);
+			List<Dart> recOut;
+
+			if (false == SingleOut)
+			{
+
+				recOut = clsOutCalc.GetDartsForOut(TotalOut, clsTurn.DartsRemaining);
+
+			}
+			else
+			{
+				recOut = clsOutCalc.GetDartsForOut(TotalOut);
+
+			}
 
 			StringBuilder sb = new StringBuilder();
 
