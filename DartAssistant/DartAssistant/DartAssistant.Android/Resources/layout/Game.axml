@@ -203,7 +203,7 @@
 					<TextView
 					android:text="Mute"
 					android:textAppearance="?android:attr/textAppearanceMedium"
-					android:layout_width="110px"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:id="@+id/MuteLabel" 
 					android:textColor="@color/primaryText"/>

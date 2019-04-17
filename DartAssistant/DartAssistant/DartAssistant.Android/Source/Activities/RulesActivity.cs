@@ -201,7 +201,7 @@ namespace DartAssistant.Droid.Source.Activities
 
             }
 
-            webView.LoadDataWithBaseURL(null, @"<html><head><style>body{padding:0 15px 50px;}p{font-size:16px;line-height:1.5;}</style></head><body><h1>301 / 501</h1>" + sb.ToString() + "</body></html>", "text/html", "utf-8", null);
+            webView.LoadDataWithBaseURL(null, @"<html><head><style>body{padding:0 15px 50px;background-color:#FEE4BE;}p{font-size:16px;line-height:1.5;}</style></head><body><h1>301 / 501</h1>" + sb.ToString() + "</body></html>", "text/html", "utf-8", null);
         }
 	}
 }

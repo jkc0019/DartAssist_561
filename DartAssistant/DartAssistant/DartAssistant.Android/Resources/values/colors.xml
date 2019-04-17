@@ -9,11 +9,12 @@
   <color name="primaryDark">#BB0000</color>
   <color name="primaryRipple">#0000FF</color>
   <color name="accent">#BB0000</color>
-  <color name="lightPrimary">#222</color>
+  <color name="lightPrimary">#FEE4BE</color>
   <color name="textIcon">#333333</color>
-  <color name="primaryText">#777777</color>
-  <color name="secondaryText">#999999</color>
+  <color name="primaryText">#000</color>
+  <color name="secondaryText">#333</color>
   <color name="tertiaryText">#555</color>
+  <color name="lightestText">#FFFFFF</color>
   <color name="divider">#666666</color>
   <color name="activated_color">#AAAAAA</color>
   
