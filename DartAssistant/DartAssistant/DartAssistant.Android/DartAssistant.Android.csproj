@@ -77,7 +77,6 @@
     <Compile Include="Source\Activities\BustActivity.cs" />
     <Compile Include="Source\Activities\WinActivity.cs" />
     <Compile Include="Source\Activities\TopScoresActivity.cs" />
-    <Compile Include="Source\Activities\Activity5.cs" />
     <Compile Include="Source\Activities\OutChartActivity.cs" />
     <Compile Include="Source\Listeners\RecognitionListener.cs" />
     <Compile Include="SplashActivity.cs" />

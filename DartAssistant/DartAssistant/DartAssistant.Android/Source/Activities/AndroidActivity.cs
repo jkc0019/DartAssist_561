@@ -346,15 +346,7 @@ namespace DartAssistant.Droid.Source.Activities
 					iscoresActivity.PutExtra("UIClassSerial", UIClassSerial);
 					StartActivity(iscoresActivity);
 					break;
-					
-				case Resource.Id.menu_info:
-					Intent iinfoActivity = new Intent(this, typeof(Activity5));
-
-					iinfoActivity.PutExtra("turnClassSerial", turnClassSerial);
-					iinfoActivity.PutExtra("UIClassSerial", UIClassSerial);
-					StartActivity(iinfoActivity);
-					break;
-					
+				
 			}
 			if (fragment == null)
 				return;

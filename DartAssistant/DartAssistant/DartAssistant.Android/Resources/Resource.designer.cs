@@ -3499,9 +3499,6 @@ namespace DartAssistant.Droid
 			// aapt resource value: 0x7f0900e8
 			public const int menu_home = 2131296488;
 			
-			// aapt resource value: 0x7f0900ec
-			public const int menu_info = 2131296492;
-			
 			// aapt resource value: 0x7f0900ea
 			public const int menu_rules = 2131296490;
 			
